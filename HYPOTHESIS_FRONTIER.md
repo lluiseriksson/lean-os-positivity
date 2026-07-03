@@ -7,6 +7,7 @@ Current as of 2026-07-03.
 - Lean `sorry`: **0** in the `OSPositivity` source tree.
 - Project axioms: **0**.
 - Build target: `lake build OSPositivity`.
+- Contract target: `lake build Interfaces`.
 - This repository is currently a definition/interface satellite, not a completed
   proof of OS reconstruction or Wilson reflection positivity.
 

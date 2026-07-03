@@ -45,13 +45,15 @@ Build completed successfully (1905 jobs).
 
 ## Public Interface
 
-Downstream repositories should import:
+Downstream repositories should import the root contract:
 
 ```lean
-import OSPositivity.Interfaces
+import Interfaces
 ```
 
 See `INTERFACES.md` for the public declarations and breaking-change policy.
+Implementation modules live under `OSPositivity/`; they are not the mother
+repository contract.
 
 ## Honesty Ledger
 

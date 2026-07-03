@@ -3,7 +3,7 @@
 Downstream import:
 
 ```lean
-import OSPositivity.Interfaces
+import Interfaces
 ```
 
 This file is the breaking-change boundary.  Any change to the names or argument
@@ -69,3 +69,6 @@ order below is a breaking change for the mother repository.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
+- `OSPositivity.Interfaces` remains as an implementation-side aggregator, but
+  the stable contract requested by the ecosystem prompt is the root
+  `Interfaces.lean` module.
