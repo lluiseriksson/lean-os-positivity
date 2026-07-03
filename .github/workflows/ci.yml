@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          use-github-cache: true
+          lake-package-directory: .
+      - name: No admitted proofs or project axioms
+        run: |
+          if grep -RInE '\b(sorry|axiom)\b' OSPositivity OSPositivity.lean; then
+            exit 1
+          fi
