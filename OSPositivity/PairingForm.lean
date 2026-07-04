@@ -250,6 +250,36 @@ theorem pairingForm_eq_zero_of_null (w : WeightFunction Omega)
   exact Complex.normSq_eq_zero.mp
     (le_antisymm hle_zero (Complex.normSq_nonneg (pairingForm w theta F G)))
 
+/--
+The pairing form is insensitive to replacing its left observable by another
+representative modulo the nullspace relation.  This is a relation-level bridge
+toward quotient well-definedness; it does not construct the GNS quotient.
+-/
+theorem pairingForm_respects_null_left (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (F₁ F₂ G : Observable Omega)
+    (hnull : Expectation.reflectionForm w.toExpectation theta (F₁ - F₂) = 0)
+    (hG : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G))
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F₁ - F₂) + b • G))) :
+    pairingForm w theta F₁ G = pairingForm w theta F₂ G := by
+  have hzero :
+      pairingForm w theta (F₁ - F₂) G = 0 :=
+    pairingForm_eq_zero_of_null w htheta hw (F₁ - F₂) G hnull hG hspan
+  have hsub :
+      pairingForm w theta (F₁ - F₂) G =
+        pairingForm w theta F₁ G - pairingForm w theta F₂ G := by
+    unfold pairingForm
+    rw [← Finset.sum_sub_distrib]
+    refine Finset.sum_congr rfl fun omega _ => ?_
+    simp only [Pi.sub_apply, map_sub]
+    ring
+  have hdiff : pairingForm w theta F₁ G - pairingForm w theta F₂ G = 0 := by
+    simpa [hsub] using hzero
+  exact sub_eq_zero.mp hdiff
+
 end WeightFunction
 
 end OSPositivity
