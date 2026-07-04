@@ -1,6 +1,6 @@
 # Mother-facing digest
 
-Date: 2026-07-03.
+Date: 2026-07-04.
 
 This digest is for `THE-ERIKSSON-PROGRAMME` consumers that need the current
 Lean interface without reading every implementation module.  The stable
@@ -59,6 +59,7 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.reflectionForm_im_eq_zero`
 - `WeightFunction.pairingForm_expand`
 - `WeightFunction.normSq_pairingForm_le`
+- `WeightFunction.pairingForm_eq_zero_of_null`
 
 Main hypotheses to supply for `normSq_pairingForm_le`:
 
@@ -69,8 +70,9 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
   `∀ b : Complex, ComplexNonnegative
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
-Smallest consumption target: use `normSq_pairingForm_le` as the Cauchy-Schwarz
-oracle needed by a future GNS nullspace or quotient well-definedness lemma.
+Smallest consumption target: use `pairingForm_eq_zero_of_null` as the null
+absorption lemma needed by a future GNS nullspace or quotient
+well-definedness proof.
 
 ### Single-bond model
 
@@ -135,15 +137,18 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a no-sorry lemma in the GNS direction:
+The next low-risk bridge is a no-sorry relation-level lemma for the GNS
+quotient:
 
 ```lean
-pairingForm_eq_zero_of_null
+pairingForm_respects_null_left
 ```
 
-Expected source: `WeightFunction.normSq_pairingForm_le`.
+Expected source: `WeightFunction.pairingForm_eq_zero_of_null` plus
+`WeightFunction.pairingForm_add_left`.
 
-Expected shape: if the diagonal reflection form of `F` is zero and the span
-hypotheses needed by Cauchy-Schwarz hold, then `WeightFunction.pairingForm w
-theta F G = 0` for admissible `G`.  This would be a direct support lemma for a
-future quotient/nullspace construction, not a reconstruction theorem.
+Expected shape: if `F₁ - F₂` is null under the reflection form, then
+`WeightFunction.pairingForm w theta F₁ G =
+WeightFunction.pairingForm w theta F₂ G` under the same admissibility/span
+hypotheses.  This would support quotient well-definedness only; it is not a
+GNS reconstruction theorem.
