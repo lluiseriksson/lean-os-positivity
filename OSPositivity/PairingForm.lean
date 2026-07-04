@@ -226,6 +226,30 @@ theorem normSq_pairingForm_le (w : WeightFunction Omega)
     rw [hnzero]
     exact mul_nonneg hF' hG'
 
+/--
+If an observable is null for the reflection form, then its pairing with any
+admissible observable vanishes.  This is the first small bridge from reflection
+Cauchy-Schwarz toward the GNS nullspace quotient.
+-/
+theorem pairingForm_eq_zero_of_null (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (F G : Observable Omega)
+    (hF_zero : Expectation.reflectionForm w.toExpectation theta F = 0)
+    (hG : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G))
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta (F + b • G))) :
+    pairingForm w theta F G = 0 := by
+  have hF : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F) := by
+    rw [hF_zero]
+    exact complexNonnegative_zero
+  have hle := normSq_pairingForm_le w htheta hw F G hF hG hspan
+  have hle_zero : Complex.normSq (pairingForm w theta F G) ≤ 0 := by
+    simpa [hF_zero] using hle
+  exact Complex.normSq_eq_zero.mp
+    (le_antisymm hle_zero (Complex.normSq_nonneg (pairingForm w theta F G)))
+
 end WeightFunction
 
 end OSPositivity

@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-03 (second iteration)
+Date: 2026-07-04
 
 ## Lean `sorry` count
 
@@ -35,6 +35,8 @@ Pairing-form layer (`PairingForm.lean`):
 * `normSq_pairingForm_le`: **the reflection Cauchy-Schwarz inequality**
   (Glimm-Jaffe Thm 6.2.2) via the discriminant argument.  This is the
   inequality that makes the M2 GNS quotient well defined.
+* `pairingForm_eq_zero_of_null`: null observables absorb the pairing, derived
+  from `normSq_pairingForm_le` and `Complex.normSq_eq_zero`.
 
 Bond-model layer (`BondModel.lean`):
 
@@ -58,8 +60,6 @@ Bond-model layer (`BondModel.lean`):
 
 `Frontier/GNSChain.lean`:
 
-* `pairingForm_eq_zero_of_null` (null observables absorb the pairing; direct
-  consequence of `normSq_pairingForm_le`).
 * `gnsSeminorm_add_le` (triangle inequality for the GNS seminorm).
 * `exists_gnsReconstruction` (M2: reconstruction data exist for every
   reflection-positive finite weight).
