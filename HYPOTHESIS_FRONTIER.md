@@ -37,6 +37,9 @@ Pairing-form layer (`PairingForm.lean`):
   inequality that makes the M2 GNS quotient well defined.
 * `pairingForm_eq_zero_of_null`: null observables absorb the pairing, derived
   from `normSq_pairingForm_le` and `Complex.normSq_eq_zero`.
+* `pairingForm_respects_null_left`: the pairing form is independent of the
+  left representative modulo the null relation, under explicit span
+  nonnegativity hypotheses.  This is a quotient well-definedness bridge only.
 
 Bond-model layer (`BondModel.lean`):
 

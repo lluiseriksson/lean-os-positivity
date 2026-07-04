@@ -60,6 +60,7 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.pairingForm_expand`
 - `WeightFunction.normSq_pairingForm_le`
 - `WeightFunction.pairingForm_eq_zero_of_null`
+- `WeightFunction.pairingForm_respects_null_left`
 
 Main hypotheses to supply for `normSq_pairingForm_le`:
 
@@ -70,9 +71,9 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
   `∀ b : Complex, ComplexNonnegative
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
-Smallest consumption target: use `pairingForm_eq_zero_of_null` as the null
-absorption lemma needed by a future GNS nullspace or quotient
-well-definedness proof.
+Smallest consumption target: use `pairingForm_respects_null_left` when proving
+that a future quotient-level pairing is independent of the left representative.
+It only supports well-definedness; it is not a GNS reconstruction theorem.
 
 ### Single-bond model
 
@@ -137,18 +138,19 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a no-sorry relation-level lemma for the GNS
+The next low-risk bridge is the symmetric relation-level lemma for the GNS
 quotient:
 
 ```lean
-pairingForm_respects_null_left
+pairingForm_respects_null_right
 ```
 
-Expected source: `WeightFunction.pairingForm_eq_zero_of_null` plus
-`WeightFunction.pairingForm_add_left`.
+Expected source: `WeightFunction.pairingForm_respects_null_left` plus
+`WeightFunction.pairingForm_conj_symm`, or a direct right-slot version of
+`WeightFunction.pairingForm_eq_zero_of_null`.
 
-Expected shape: if `F₁ - F₂` is null under the reflection form, then
-`WeightFunction.pairingForm w theta F₁ G =
-WeightFunction.pairingForm w theta F₂ G` under the same admissibility/span
+Expected shape: if `G₁ - G₂` is null under the reflection form, then
+`WeightFunction.pairingForm w theta F G₁ =
+WeightFunction.pairingForm w theta F G₂` under explicit admissibility/span
 hypotheses.  This would support quotient well-definedness only; it is not a
 GNS reconstruction theorem.
