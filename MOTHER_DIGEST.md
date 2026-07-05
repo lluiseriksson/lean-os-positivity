@@ -70,6 +70,8 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.pairingForm_respects_null_equivalent`
 - `WeightFunction.ReflectionNullContext`
 - `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
+- `WeightFunction.ReflectionNullContext.refl`
+- `WeightFunction.ReflectionNullContext.symm`
 - `WeightFunction.ReflectionNullContext.trans`
 - `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 
@@ -84,7 +86,8 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
 
 Smallest consumption target: use `ReflectionNullContext` when reflection
 invariance and span positivity are fixed once for the model, then call
-`ReflectionNullContext.trans` and
+`ReflectionNullContext.refl`, `ReflectionNullContext.symm`,
+`ReflectionNullContext.trans`, and
 `ReflectionNullContext.pairingForm_respects_null` without restating those
 hypotheses at every null-relation step.  Use the one-sided lemmas when only one
 representative changes.  These only support well-definedness; they are not GNS

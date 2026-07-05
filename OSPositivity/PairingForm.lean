@@ -479,6 +479,19 @@ theorem diagonal_nonnegative (ctx : ReflectionNullContext w theta)
   rw [← hzero]
   exact ctx.span_nonnegative F 0 0
 
+/-- Reflexivity of null-equivalence inside the packaged context. -/
+theorem refl (_ctx : ReflectionNullContext w theta)
+    (F : Observable Omega) :
+    ReflectionNullEquivalent w theta F F :=
+  reflectionNullEquivalent_refl w theta F
+
+/-- Symmetry of null-equivalence inside the packaged context. -/
+theorem symm (_ctx : ReflectionNullContext w theta)
+    (F G : Observable Omega)
+    (hFG : ReflectionNullEquivalent w theta F G) :
+    ReflectionNullEquivalent w theta G F :=
+  reflectionNullEquivalent_symm w theta F G hFG
+
 /-- Transitivity of null-equivalence using the packaged hypotheses. -/
 theorem trans (ctx : ReflectionNullContext w theta)
     (F G H : Observable Omega)

@@ -55,6 +55,8 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.pairingForm_respects_null_equivalent`
 - `WeightFunction.ReflectionNullContext`
 - `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
+- `WeightFunction.ReflectionNullContext.refl`
+- `WeightFunction.ReflectionNullContext.symm`
 - `WeightFunction.ReflectionNullContext.trans`
 - `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 - `LatticeReflection.DependsOnlyOn.add`
