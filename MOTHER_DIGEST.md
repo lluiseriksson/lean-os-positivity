@@ -1,6 +1,6 @@
 # Mother-facing digest
 
-Date: 2026-07-04.
+Date: 2026-07-05.
 
 This digest is for `THE-ERIKSSON-PROGRAMME` consumers that need the current
 Lean interface without reading every implementation module.  The stable
@@ -62,6 +62,7 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.pairingForm_eq_zero_of_null`
 - `WeightFunction.pairingForm_respects_null_left`
 - `WeightFunction.pairingForm_respects_null_right`
+- `WeightFunction.pairingForm_respects_null`
 
 Main hypotheses to supply for `normSq_pairingForm_le`:
 
@@ -72,9 +73,9 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
   `∀ b : Complex, ComplexNonnegative
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
-Smallest consumption target: use `pairingForm_respects_null_left` and
-`pairingForm_respects_null_right` when proving that a future quotient-level
-pairing is independent of representatives.  They only support
+Smallest consumption target: use `pairingForm_respects_null` when proving that
+a future quotient-level pairing is independent of both representatives.  Use
+the one-sided lemmas when only one representative changes.  These only support
 well-definedness; they are not GNS reconstruction theorems.
 
 ### Single-bond model
@@ -140,18 +141,17 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a combined relation-level well-definedness lemma
-for the GNS quotient:
+The next low-risk bridge is a named null-relation predicate for the pairing
+layer, with a theorem packaging `WeightFunction.pairingForm_respects_null` as
+well-definedness over that relation.
 
-```lean
-pairingForm_respects_null
-```
+Expected source: `WeightFunction.pairingForm_eq_zero_of_null`,
+`WeightFunction.pairingForm_respects_null_left`,
+`WeightFunction.pairingForm_respects_null_right`, and
+`WeightFunction.pairingForm_respects_null`.
 
-Expected source: `WeightFunction.pairingForm_respects_null_left` and
-`WeightFunction.pairingForm_respects_null_right`.
-
-Expected shape: if `F₁ - F₂` and `G₁ - G₂` are null under the reflection
-form, then `WeightFunction.pairingForm w theta F₁ G₁ =
-WeightFunction.pairingForm w theta F₂ G₂` under explicit admissibility/span
-hypotheses.  This would support quotient well-definedness only; it is not a
-GNS reconstruction theorem.
+Expected shape: define a small relation such as `ReflectionNullEquivalent w
+theta F G := Expectation.reflectionForm w.toExpectation theta (F - G) = 0`,
+then prove the existing combined bridge against that relation under the same
+explicit nonnegativity/span hypotheses.  This would still support quotient
+well-definedness only; it is not a GNS reconstruction theorem.

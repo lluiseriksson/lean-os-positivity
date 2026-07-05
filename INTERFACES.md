@@ -29,6 +29,42 @@ order below is a breaking change for the mother repository.
 - `LatticeReflection.positiveObservableSet`
 - `LatticeReflection.ReflectionPositive`
 
+## Pairing Form and Bond Model
+
+- `WeightFunction`
+- `FiniteProbability.toWeightFunction`
+- `WeightFunction.toExpectation`
+- `WeightFunction.pairingForm`
+- `WeightFunction.reflectionForm_eq_pairingForm`
+- `WeightFunction.pairingForm_add_left`
+- `WeightFunction.pairingForm_add_right`
+- `WeightFunction.pairingForm_smul_left`
+- `WeightFunction.pairingForm_smul_right`
+- `WeightFunction.pairingForm_conj_symm`
+- `WeightFunction.reflectionForm_im_eq_zero`
+- `WeightFunction.pairingForm_expand`
+- `WeightFunction.normSq_pairingForm_le`
+- `WeightFunction.pairingForm_eq_zero_of_null`
+- `WeightFunction.pairingForm_respects_null_left`
+- `WeightFunction.pairingForm_respects_null_right`
+- `WeightFunction.pairingForm_respects_null`
+- `LatticeReflection.DependsOnlyOn.add`
+- `LatticeReflection.DependsOnlyOn.smul`
+- `bondReflection`
+- `bondWeight`
+- `eval_of_dependsOnlyOn_true`
+- `bondQuadForm_re`
+- `bondQuadForm_im`
+- `complexNonnegative_bondForm_of_psd`
+- `bond_reflectionForm_eq`
+- `bond_reflectionPositive`
+- `psd_of_bond_reflectionPositive`
+- `ferromagneticKernel`
+- `ferromagneticKernel_nonneg`
+- `ferromagneticKernel_symm`
+- `ferromagneticKernel_psd`
+- `isingBond_reflectionPositive`
+
 ## Transfer-Matrix Layer
 
 - `TransferMatrixReflectionCertificate`
@@ -66,6 +102,9 @@ order below is a breaking change for the mother repository.
   implementation may refine it to a concrete continuous-functional-calculus
   statement; that will be a breaking change unless provided as an additional
   theorem.
+- The pairing-form and bond-model theorem layers are additive exports through
+  `Interfaces.lean`; they do not change the argument order or meaning of the
+  original M0/M1/M2/M3 interface declarations.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
