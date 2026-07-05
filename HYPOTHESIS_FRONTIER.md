@@ -55,12 +55,13 @@ Pairing-form layer (`PairingForm.lean`):
   null-representative relation.  Transitivity is proved under the explicit
   reflection-invariance and positivity/span hypotheses that kill the cross
   term.
-* `ReflectionNullContext`, `ReflectionNullContext.diagonal_nonnegative`,
-  `ReflectionNullContext.trans`, and
+* `ReflectionNullContext`, `reflectionNullContext_of_reflectionPositive_univ`,
+  `ReflectionNullContext.diagonal_nonnegative`, `ReflectionNullContext.trans`, and
   `ReflectionNullContext.pairingForm_respects_null`: a reusable wrapper around
   fixed reflection-invariance and span-positivity hypotheses for relation-level
   null bookkeeping.  This removes repeated hypotheses at downstream call sites
-  but still does not construct quotient data.
+  but still does not construct quotient data.  The `Set.univ` constructor covers
+  finite models where every observable is admissible.
 
 Bond-model layer (`BondModel.lean`):
 
@@ -101,9 +102,9 @@ transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything W
 Continuum limit and full OS axioms remain deliberately out of scope.
 
 Next small bridge: derive a `ReflectionNullContext` from a concrete finite
-model whose positive-observable class is closed under addition and scalar
-multiplication.  This should still stop before quotient or `GNSReconstruction`
-construction.
+model whose positive-observable class is a proper closed subspace under
+addition and scalar multiplication.  This should still stop before quotient or
+`GNSReconstruction` construction.
 
 ## Frontier branch policy
 
