@@ -43,6 +43,10 @@ Pairing-form layer (`PairingForm.lean`):
 * `pairingForm_respects_null_right`: the symmetric right-representative bridge,
   derived from null absorption and Hermitian symmetry.  This is still only a
   relation-level quotient well-definedness lemma.
+* `pairingForm_respects_null`: combined left/right representative independence
+  for the pairing form, under the explicit span nonnegativity hypotheses needed
+  by the one-sided bridges.  This is still a relation-level lemma, not the GNS
+  quotient construction.
 
 Bond-model layer (`BondModel.lean`):
 
@@ -76,9 +80,9 @@ Bond-model layer (`BondModel.lean`):
 
 Reflection positivity now has content: a two-sided characterization on the
 minimal lattice and one unconditional model theorem, plus the Cauchy-Schwarz
-inequality and left/right relation-level null bridges that M2 rests on.
-Missing: a combined representative-independence lemma, the actual GNS quotient
-construction, the chain/torus geometry (multi-bond statement above), the
+inequality and relation-level null representative bridges that M2 rests on.
+Missing: the actual GNS quotient construction, the chain/torus geometry
+(multi-bond statement above), the
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 

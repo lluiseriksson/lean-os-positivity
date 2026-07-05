@@ -320,6 +320,35 @@ theorem pairingForm_respects_null_right (w : WeightFunction Omega)
     simpa [hsub] using hzero_right
   exact sub_eq_zero.mp hdiff
 
+/--
+The pairing form is insensitive to replacing both observables by null-equivalent
+representatives, assuming the explicit span nonnegativity hypotheses needed by
+the two one-sided bridges.  This remains a relation-level lemma; it does not
+construct the GNS quotient.
+-/
+theorem pairingForm_respects_null (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (F₁ F₂ G₁ G₂ : Observable Omega)
+    (hnull_left : Expectation.reflectionForm w.toExpectation theta (F₁ - F₂) = 0)
+    (hG₁ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G₁))
+    (hspan_left : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F₁ - F₂) + b • G₁)))
+    (hnull_right : Expectation.reflectionForm w.toExpectation theta (G₁ - G₂) = 0)
+    (hF₂ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F₂))
+    (hspan_right : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((G₁ - G₂) + b • F₂))) :
+    pairingForm w theta F₁ G₁ = pairingForm w theta F₂ G₂ := by
+  calc
+    pairingForm w theta F₁ G₁ = pairingForm w theta F₂ G₁ :=
+      pairingForm_respects_null_left w htheta hw F₁ F₂ G₁
+        hnull_left hG₁ hspan_left
+    _ = pairingForm w theta F₂ G₂ :=
+      pairingForm_respects_null_right w htheta hw F₂ G₁ G₂
+        hnull_right hF₂ hspan_right
+
 end WeightFunction
 
 end OSPositivity
