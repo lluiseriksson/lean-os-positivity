@@ -50,6 +50,10 @@ Pairing-form layer (`PairingForm.lean`):
 * `ReflectionNullEquivalent` and `pairingForm_respects_null_equivalent`: a named
   null-representative relation plus the combined well-definedness bridge
   packaged over that relation.  This still does not construct the quotient.
+* `reflectionNullEquivalent_refl`, `reflectionNullEquivalent_symm`: elementary
+  bookkeeping facts for the named null-representative relation.  Transitivity
+  remains a separate bridge because it needs the explicit positivity/span
+  hypotheses that kill the cross term.
 
 Bond-model layer (`BondModel.lean`):
 
