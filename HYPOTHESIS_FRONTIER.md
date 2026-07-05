@@ -47,6 +47,9 @@ Pairing-form layer (`PairingForm.lean`):
   for the pairing form, under the explicit span nonnegativity hypotheses needed
   by the one-sided bridges.  This is still a relation-level lemma, not the GNS
   quotient construction.
+* `ReflectionNullEquivalent` and `pairingForm_respects_null_equivalent`: a named
+  null-representative relation plus the combined well-definedness bridge
+  packaged over that relation.  This still does not construct the quotient.
 
 Bond-model layer (`BondModel.lean`):
 

@@ -251,6 +251,15 @@ theorem pairingForm_eq_zero_of_null (w : WeightFunction Omega)
     (le_antisymm hle_zero (Complex.normSq_nonneg (pairingForm w theta F G)))
 
 /--
+Two observables are equivalent modulo the reflection null relation when their
+difference has zero reflection form.  This is only a relation-level predicate;
+it does not construct a quotient space.
+-/
+def ReflectionNullEquivalent (w : WeightFunction Omega) (theta : Omega -> Omega)
+    (F G : Observable Omega) : Prop :=
+  Expectation.reflectionForm w.toExpectation theta (F - G) = 0
+
+/--
 The pairing form is insensitive to replacing its left observable by another
 representative modulo the nullspace relation.  This is a relation-level bridge
 toward quotient well-definedness; it does not construct the GNS quotient.
@@ -348,6 +357,30 @@ theorem pairingForm_respects_null (w : WeightFunction Omega)
     _ = pairingForm w theta F₂ G₂ :=
       pairingForm_respects_null_right w htheta hw F₂ G₁ G₂
         hnull_right hF₂ hspan_right
+
+/--
+The named null-equivalence relation is compatible with the pairing form in both
+arguments, under the same explicit positivity hypotheses as
+`pairingForm_respects_null`.  This packages quotient well-definedness data only;
+it is not a GNS reconstruction theorem.
+-/
+theorem pairingForm_respects_null_equivalent (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (F₁ F₂ G₁ G₂ : Observable Omega)
+    (hnull_left : ReflectionNullEquivalent w theta F₁ F₂)
+    (hG₁ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G₁))
+    (hspan_left : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F₁ - F₂) + b • G₁)))
+    (hnull_right : ReflectionNullEquivalent w theta G₁ G₂)
+    (hF₂ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F₂))
+    (hspan_right : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((G₁ - G₂) + b • F₂))) :
+    pairingForm w theta F₁ G₁ = pairingForm w theta F₂ G₂ :=
+  pairingForm_respects_null w htheta hw F₁ F₂ G₁ G₂
+    hnull_left hG₁ hspan_left hnull_right hF₂ hspan_right
 
 end WeightFunction
 
