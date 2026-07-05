@@ -69,6 +69,7 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.pairingForm_respects_null`
 - `WeightFunction.pairingForm_respects_null_equivalent`
 - `WeightFunction.ReflectionNullContext`
+- `WeightFunction.reflectionNullContext_of_reflectionPositive_univ`
 - `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
 - `WeightFunction.ReflectionNullContext.refl`
 - `WeightFunction.ReflectionNullContext.symm`
@@ -89,9 +90,11 @@ invariance and span positivity are fixed once for the model, then call
 `ReflectionNullContext.refl`, `ReflectionNullContext.symm`,
 `ReflectionNullContext.trans`, and
 `ReflectionNullContext.pairingForm_respects_null` without restating those
-hypotheses at every null-relation step.  Use the one-sided lemmas when only one
-representative changes.  These only support well-definedness; they are not GNS
-reconstruction theorems.
+hypotheses at every null-relation step.  If the model has
+`Expectation.ReflectionPositive ... Set.univ`, build the context with
+`WeightFunction.reflectionNullContext_of_reflectionPositive_univ`.  Use the
+one-sided lemmas when only one representative changes.  These only support
+well-definedness; they are not GNS reconstruction theorems.
 
 ### Single-bond model
 
@@ -162,9 +165,9 @@ this repo unless a theorem constructs the certificate in the consuming context.
 ## Suggested next bridge
 
 The next low-risk bridge is to derive a `ReflectionNullContext` from a concrete
-closed positive-observable class in a finite model, so downstream code can move
-from model reflection positivity to the packaged null-relation API without
-manual span hypotheses.
+closed positive-observable class smaller than `Set.univ` in a finite model, so
+downstream code can move from model reflection positivity to the packaged
+null-relation API without manual span hypotheses.
 
 Expected source: `Expectation.ReflectionPositive`,
 `LatticeReflection.DependsOnlyOn.add`/`smul`, and

@@ -54,6 +54,7 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.pairingForm_respects_null`
 - `WeightFunction.pairingForm_respects_null_equivalent`
 - `WeightFunction.ReflectionNullContext`
+- `WeightFunction.reflectionNullContext_of_reflectionPositive_univ`
 - `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
 - `WeightFunction.ReflectionNullContext.refl`
 - `WeightFunction.ReflectionNullContext.symm`
@@ -128,6 +129,9 @@ order below is a breaking change for the mother repository.
   and span-positivity hypotheses for relation-level null bookkeeping.  Its
   methods are wrappers around the existing null-equivalence and pairing-form
   lemmas; they do not construct quotient data.
+- `WeightFunction.reflectionNullContext_of_reflectionPositive_univ` builds that
+  packaged context from `Expectation.ReflectionPositive ... Set.univ`, for
+  finite models where the full observable class is admissible.
 - `LatticeReflection.DependsOnlyOn.zero`, `.neg`, and `.sub` are additive
   closure helpers for positive-side observables; they support nullspace
   bookkeeping over differences without changing existing argument order.

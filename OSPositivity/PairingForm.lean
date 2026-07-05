@@ -465,6 +465,22 @@ structure ReflectionNullContext (w : WeightFunction Omega) (theta : Omega -> Ome
     ComplexNonnegative
       (Expectation.reflectionForm w.toExpectation theta (F + b • G))
 
+/--
+Build the packaged null-relation context from reflection positivity on the full
+observable class.  This is a finite-volume helper for models where every span
+observable is admissible; it does not construct quotient data.
+-/
+theorem reflectionNullContext_of_reflectionPositive_univ (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hRP : Expectation.ReflectionPositive w.toExpectation theta Set.univ) :
+    ReflectionNullContext w theta where
+  involutive := htheta
+  weight_reflectionInvariant := hw
+  span_nonnegative := by
+    intro F G b
+    exact hRP (F + b • G) (Set.mem_univ _)
+
 namespace ReflectionNullContext
 
 variable {w : WeightFunction Omega} {theta : Omega -> Omega}
