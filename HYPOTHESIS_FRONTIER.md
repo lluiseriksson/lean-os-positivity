@@ -55,6 +55,12 @@ Pairing-form layer (`PairingForm.lean`):
   null-representative relation.  Transitivity is proved under the explicit
   reflection-invariance and positivity/span hypotheses that kill the cross
   term.
+* `ReflectionNullContext`, `ReflectionNullContext.diagonal_nonnegative`,
+  `ReflectionNullContext.trans`, and
+  `ReflectionNullContext.pairingForm_respects_null`: a reusable wrapper around
+  fixed reflection-invariance and span-positivity hypotheses for relation-level
+  null bookkeeping.  This removes repeated hypotheses at downstream call sites
+  but still does not construct quotient data.
 
 Bond-model layer (`BondModel.lean`):
 
@@ -94,11 +100,10 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: package the fixed hypotheses around
-`ReflectionNullEquivalent` into a reusable relation-level helper so downstream
-well-definedness proofs can consume `refl`/`symm`/`trans` without restating the
-same assumptions at every call site.  This should still stop before quotient or
-`GNSReconstruction` construction.
+Next small bridge: derive a `ReflectionNullContext` from a concrete finite
+model whose positive-observable class is closed under addition and scalar
+multiplication.  This should still stop before quotient or `GNSReconstruction`
+construction.
 
 ## Frontier branch policy
 

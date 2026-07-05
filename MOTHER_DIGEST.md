@@ -68,6 +68,10 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.pairingForm_respects_null_right`
 - `WeightFunction.pairingForm_respects_null`
 - `WeightFunction.pairingForm_respects_null_equivalent`
+- `WeightFunction.ReflectionNullContext`
+- `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
+- `WeightFunction.ReflectionNullContext.trans`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 
 Main hypotheses to supply for `normSq_pairingForm_le`:
 
@@ -78,13 +82,13 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
   `∀ b : Complex, ComplexNonnegative
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
-Smallest consumption target: use `ReflectionNullEquivalent` to name the null
-representative relation, `reflectionNullEquivalent_refl`/`symm`/`trans` for
-explicit-hypothesis relation bookkeeping, and
-`pairingForm_respects_null_equivalent` when proving that a future
-quotient-level pairing is independent of both representatives.  Use the
-one-sided lemmas when only one representative changes.  These only support
-well-definedness; they are not GNS reconstruction theorems.
+Smallest consumption target: use `ReflectionNullContext` when reflection
+invariance and span positivity are fixed once for the model, then call
+`ReflectionNullContext.trans` and
+`ReflectionNullContext.pairingForm_respects_null` without restating those
+hypotheses at every null-relation step.  Use the one-sided lemmas when only one
+representative changes.  These only support well-definedness; they are not GNS
+reconstruction theorems.
 
 ### Single-bond model
 
@@ -149,15 +153,14 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a small consumer-facing wrapper around the
-`ReflectionNullEquivalent` bookkeeping: package the fixed
-reflection-invariance and span-positivity hypotheses needed by
-`reflectionNullEquivalent_trans` so downstream code can reuse the relation
-facts without restating every hypothesis at each call site.
+The next low-risk bridge is to derive a `ReflectionNullContext` from a concrete
+closed positive-observable class in a finite model, so downstream code can move
+from model reflection positivity to the packaged null-relation API without
+manual span hypotheses.
 
-Expected source: `WeightFunction.ReflectionNullEquivalent`,
-`WeightFunction.reflectionNullEquivalent_trans`, and
-`WeightFunction.pairingForm_respects_null_equivalent`.
+Expected source: `Expectation.ReflectionPositive`,
+`LatticeReflection.DependsOnlyOn.add`/`smul`, and
+`WeightFunction.ReflectionNullContext`.
 
-Expected shape: keep the relation-level scope; do not construct
-`GNSReconstruction` or a Hilbert quotient in this repository.
+Expected shape: prove only a model/interface helper that supplies the context;
+do not construct `GNSReconstruction` or a Hilbert quotient in this repository.

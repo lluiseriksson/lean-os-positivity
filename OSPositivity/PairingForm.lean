@@ -451,6 +451,60 @@ theorem pairingForm_respects_null_equivalent (w : WeightFunction Omega)
   pairingForm_respects_null w htheta hw F₁ F₂ G₁ G₂
     hnull_left hG₁ hspan_left hnull_right hF₂ hspan_right
 
+/--
+Reusable context for relation-level null bookkeeping under fixed reflection
+invariance and span-positivity hypotheses.  This packages the hypotheses used
+by the `ReflectionNullEquivalent` helpers; it still does not construct a
+quotient space or `GNSReconstruction`.
+-/
+structure ReflectionNullContext (w : WeightFunction Omega) (theta : Omega -> Omega)
+    where
+  involutive : Function.Involutive theta
+  weight_reflectionInvariant : ∀ omega, w.weight (theta omega) = w.weight omega
+  span_nonnegative : ∀ F G : Observable Omega, ∀ b : Complex,
+    ComplexNonnegative
+      (Expectation.reflectionForm w.toExpectation theta (F + b • G))
+
+namespace ReflectionNullContext
+
+variable {w : WeightFunction Omega} {theta : Omega -> Omega}
+
+/-- Diagonal nonnegativity follows from the packaged span-positivity input. -/
+theorem diagonal_nonnegative (ctx : ReflectionNullContext w theta)
+    (F : Observable Omega) :
+    ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F) := by
+  have hzero : F + (0 : Complex) • (0 : Observable Omega) = F := by
+    funext omega
+    simp
+  rw [← hzero]
+  exact ctx.span_nonnegative F 0 0
+
+/-- Transitivity of null-equivalence using the packaged hypotheses. -/
+theorem trans (ctx : ReflectionNullContext w theta)
+    (F G H : Observable Omega)
+    (hFG : ReflectionNullEquivalent w theta F G)
+    (hGH : ReflectionNullEquivalent w theta G H) :
+    ReflectionNullEquivalent w theta F H :=
+  reflectionNullEquivalent_trans w ctx.involutive ctx.weight_reflectionInvariant
+    F G H hFG hGH (ctx.span_nonnegative (F - G) (G - H))
+
+/--
+Pairing-form well-definedness over null-equivalent representatives using the
+packaged hypotheses.  This is still relation-level data only.
+-/
+theorem pairingForm_respects_null (ctx : ReflectionNullContext w theta)
+    (F₁ F₂ G₁ G₂ : Observable Omega)
+    (hnull_left : ReflectionNullEquivalent w theta F₁ F₂)
+    (hnull_right : ReflectionNullEquivalent w theta G₁ G₂) :
+    pairingForm w theta F₁ G₁ = pairingForm w theta F₂ G₂ :=
+  pairingForm_respects_null_equivalent w ctx.involutive
+    ctx.weight_reflectionInvariant F₁ F₂ G₁ G₂ hnull_left
+    (ctx.diagonal_nonnegative G₁) (ctx.span_nonnegative (F₁ - F₂) G₁)
+    hnull_right (ctx.diagonal_nonnegative F₂)
+    (ctx.span_nonnegative (G₁ - G₂) F₂)
+
+end ReflectionNullContext
+
 end WeightFunction
 
 end OSPositivity
