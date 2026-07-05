@@ -63,6 +63,7 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.ReflectionNullEquivalent`
 - `WeightFunction.reflectionNullEquivalent_refl`
 - `WeightFunction.reflectionNullEquivalent_symm`
+- `WeightFunction.reflectionNullEquivalent_trans`
 - `WeightFunction.pairingForm_respects_null_left`
 - `WeightFunction.pairingForm_respects_null_right`
 - `WeightFunction.pairingForm_respects_null`
@@ -78,11 +79,12 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
 Smallest consumption target: use `ReflectionNullEquivalent` to name the null
-representative relation, `reflectionNullEquivalent_refl`/`symm` for elementary
-relation bookkeeping, and `pairingForm_respects_null_equivalent` when proving
-that a future quotient-level pairing is independent of both representatives.
-Use the one-sided lemmas when only one representative changes.  These only
-support well-definedness; they are not GNS reconstruction theorems.
+representative relation, `reflectionNullEquivalent_refl`/`symm`/`trans` for
+explicit-hypothesis relation bookkeeping, and
+`pairingForm_respects_null_equivalent` when proving that a future
+quotient-level pairing is independent of both representatives.  Use the
+one-sided lemmas when only one representative changes.  These only support
+well-definedness; they are not GNS reconstruction theorems.
 
 ### Single-bond model
 
@@ -147,14 +149,15 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is the transitivity side of
-`ReflectionNullEquivalent`: prove a `trans` helper under the same explicit
-reflection-invariance and positivity/span hypotheses already used by the
-pairing layer, likely through null absorption for the cross term.
+The next low-risk bridge is a small consumer-facing wrapper around the
+`ReflectionNullEquivalent` bookkeeping: package the fixed
+reflection-invariance and span-positivity hypotheses needed by
+`reflectionNullEquivalent_trans` so downstream code can reuse the relation
+facts without restating every hypothesis at each call site.
 
 Expected source: `WeightFunction.ReflectionNullEquivalent`,
-`WeightFunction.reflectionForm_im_eq_zero`, and the existing null absorption
-lemmas.
+`WeightFunction.reflectionNullEquivalent_trans`, and
+`WeightFunction.pairingForm_respects_null_equivalent`.
 
 Expected shape: keep the relation-level scope; do not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.

@@ -283,6 +283,52 @@ theorem reflectionNullEquivalent_symm (w : WeightFunction Omega)
   exact h
 
 /--
+The named null-equivalence relation is transitive when the explicit positivity
+input needed to kill the cross term is available.  This remains relation-level
+bookkeeping; it does not construct the GNS quotient.
+-/
+theorem reflectionNullEquivalent_trans (w : WeightFunction Omega)
+    {theta : Omega -> Omega} (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (F G H : Observable Omega)
+    (hFG : ReflectionNullEquivalent w theta F G)
+    (hGH : ReflectionNullEquivalent w theta G H)
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F - G) + b • (G - H)))) :
+    ReflectionNullEquivalent w theta F H := by
+  have hGH_nonneg :
+      ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta (G - H)) := by
+    rw [hGH]
+    exact complexNonnegative_zero
+  have hAB :
+      pairingForm w theta (F - G) (G - H) = 0 :=
+    pairingForm_eq_zero_of_null w htheta hw (F - G) (G - H)
+      hFG hGH_nonneg hspan
+  have hAA :
+      pairingForm w theta (F - G) (F - G) = 0 := by
+    simpa [ReflectionNullEquivalent, reflectionForm_eq_pairingForm] using hFG
+  have hBB :
+      pairingForm w theta (G - H) (G - H) = 0 := by
+    simpa [ReflectionNullEquivalent, reflectionForm_eq_pairingForm] using hGH
+  have hBA :
+      pairingForm w theta (G - H) (F - G) = 0 := by
+    have hsym :
+        pairingForm w theta (G - H) (F - G) =
+          conj (pairingForm w theta (F - G) (G - H)) :=
+      pairingForm_conj_symm w htheta hw (F - G) (G - H)
+    rw [hsym, hAB]
+    simp
+  have hdiff :
+      F - H = (F - G) + (1 : Complex) • (G - H) := by
+    funext omega
+    simp only [Pi.sub_apply, Pi.add_apply, one_smul]
+    ring
+  unfold ReflectionNullEquivalent
+  rw [hdiff, reflectionForm_eq_pairingForm, pairingForm_expand]
+  simp [hAA, hAB, hBA, hBB]
+
+/--
 The pairing form is insensitive to replacing its left observable by another
 representative modulo the nullspace relation.  This is a relation-level bridge
 toward quotient well-definedness; it does not construct the GNS quotient.
