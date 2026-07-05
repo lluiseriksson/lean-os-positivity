@@ -259,6 +259,29 @@ def ReflectionNullEquivalent (w : WeightFunction Omega) (theta : Omega -> Omega)
     (F G : Observable Omega) : Prop :=
   Expectation.reflectionForm w.toExpectation theta (F - G) = 0
 
+/-- Every observable is null-equivalent to itself. -/
+theorem reflectionNullEquivalent_refl (w : WeightFunction Omega)
+    (theta : Omega -> Omega) (F : Observable Omega) :
+    ReflectionNullEquivalent w theta F F := by
+  unfold ReflectionNullEquivalent Expectation.reflectionForm toExpectation
+  simp
+
+/-- The named null-equivalence relation is symmetric. -/
+theorem reflectionNullEquivalent_symm (w : WeightFunction Omega)
+    (theta : Omega -> Omega) (F G : Observable Omega)
+    (h : ReflectionNullEquivalent w theta F G) :
+    ReflectionNullEquivalent w theta G F := by
+  unfold ReflectionNullEquivalent at h ⊢
+  have hsame :
+      Expectation.reflectionForm w.toExpectation theta (G - F) =
+        Expectation.reflectionForm w.toExpectation theta (F - G) := by
+    unfold Expectation.reflectionForm toExpectation
+    refine Finset.sum_congr rfl fun omega _ => ?_
+    simp only [Pi.sub_apply, map_sub]
+    ring
+  rw [hsame]
+  exact h
+
 /--
 The pairing form is insensitive to replacing its left observable by another
 representative modulo the nullspace relation.  This is a relation-level bridge

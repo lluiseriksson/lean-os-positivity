@@ -61,6 +61,8 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.normSq_pairingForm_le`
 - `WeightFunction.pairingForm_eq_zero_of_null`
 - `WeightFunction.ReflectionNullEquivalent`
+- `WeightFunction.reflectionNullEquivalent_refl`
+- `WeightFunction.reflectionNullEquivalent_symm`
 - `WeightFunction.pairingForm_respects_null_left`
 - `WeightFunction.pairingForm_respects_null_right`
 - `WeightFunction.pairingForm_respects_null`
@@ -76,7 +78,8 @@ Main hypotheses to supply for `normSq_pairingForm_le`:
     (Expectation.reflectionForm w.toExpectation theta (F + b • G))`
 
 Smallest consumption target: use `ReflectionNullEquivalent` to name the null
-representative relation and `pairingForm_respects_null_equivalent` when proving
+representative relation, `reflectionNullEquivalent_refl`/`symm` for elementary
+relation bookkeeping, and `pairingForm_respects_null_equivalent` when proving
 that a future quotient-level pairing is independent of both representatives.
 Use the one-sided lemmas when only one representative changes.  These only
 support well-definedness; they are not GNS reconstruction theorems.
@@ -144,10 +147,10 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is to make `ReflectionNullEquivalent` easier to use in
-quotient-side code by proving elementary relation facts (`refl`, `symm`, and
-`trans`) under the same reflection-invariance and explicit positivity/span
-hypotheses already used by the pairing layer.
+The next low-risk bridge is the transitivity side of
+`ReflectionNullEquivalent`: prove a `trans` helper under the same explicit
+reflection-invariance and positivity/span hypotheses already used by the
+pairing layer, likely through null absorption for the cross term.
 
 Expected source: `WeightFunction.ReflectionNullEquivalent`,
 `WeightFunction.reflectionForm_im_eq_zero`, and the existing null absorption
