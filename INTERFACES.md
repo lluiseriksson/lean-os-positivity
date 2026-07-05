@@ -53,6 +53,10 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.pairingForm_respects_null_right`
 - `WeightFunction.pairingForm_respects_null`
 - `WeightFunction.pairingForm_respects_null_equivalent`
+- `WeightFunction.ReflectionNullContext`
+- `WeightFunction.ReflectionNullContext.diagonal_nonnegative`
+- `WeightFunction.ReflectionNullContext.trans`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 - `LatticeReflection.DependsOnlyOn.add`
 - `LatticeReflection.DependsOnlyOn.smul`
 - `bondReflection`
@@ -115,6 +119,10 @@ order below is a breaking change for the mother repository.
   hypothesis `trans` facts, but it does not construct the quotient or a
   `GNSReconstruction`; it only names the hypothesis consumed by
   `WeightFunction.pairingForm_respects_null_equivalent`.
+- `WeightFunction.ReflectionNullContext` packages fixed reflection-invariance
+  and span-positivity hypotheses for relation-level null bookkeeping.  Its
+  methods are wrappers around the existing null-equivalence and pairing-form
+  lemmas; they do not construct quotient data.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
