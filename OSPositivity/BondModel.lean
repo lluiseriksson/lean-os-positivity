@@ -44,6 +44,12 @@ namespace LatticeReflection
 
 variable {Site : Type u} {Spin : Type v}
 
+/-- The zero observable depends only on any chosen site set. -/
+theorem DependsOnlyOn.zero (S : Set Site) :
+    DependsOnlyOn S (0 : LatticeObservable Site Spin) := by
+  intro sigma tau h
+  rfl
+
 /-- Half-space observables are closed under addition. -/
 theorem DependsOnlyOn.add {S : Set Site} {F G : LatticeObservable Site Spin}
     (hF : DependsOnlyOn S F) (hG : DependsOnlyOn S G) :
@@ -57,6 +63,20 @@ theorem DependsOnlyOn.smul {S : Set Site} {F : LatticeObservable Site Spin}
     DependsOnlyOn S (b • F) := by
   intro sigma tau h
   simp only [Pi.smul_apply, hF sigma tau h]
+
+/-- Half-space observables are closed under negation. -/
+theorem DependsOnlyOn.neg {S : Set Site} {F : LatticeObservable Site Spin}
+    (hF : DependsOnlyOn S F) :
+    DependsOnlyOn S (-F) := by
+  intro sigma tau h
+  simp only [Pi.neg_apply, hF sigma tau h]
+
+/-- Half-space observables are closed under subtraction. -/
+theorem DependsOnlyOn.sub {S : Set Site} {F G : LatticeObservable Site Spin}
+    (hF : DependsOnlyOn S F) (hG : DependsOnlyOn S G) :
+    DependsOnlyOn S (F - G) := by
+  intro sigma tau h
+  simp only [Pi.sub_apply, hF sigma tau h, hG sigma tau h]
 
 end LatticeReflection
 
