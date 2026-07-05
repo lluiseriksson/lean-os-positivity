@@ -45,9 +45,11 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.pairingForm_expand`
 - `WeightFunction.normSq_pairingForm_le`
 - `WeightFunction.pairingForm_eq_zero_of_null`
+- `WeightFunction.ReflectionNullEquivalent`
 - `WeightFunction.pairingForm_respects_null_left`
 - `WeightFunction.pairingForm_respects_null_right`
 - `WeightFunction.pairingForm_respects_null`
+- `WeightFunction.pairingForm_respects_null_equivalent`
 - `LatticeReflection.DependsOnlyOn.add`
 - `LatticeReflection.DependsOnlyOn.smul`
 - `bondReflection`
@@ -105,6 +107,10 @@ order below is a breaking change for the mother repository.
 - The pairing-form and bond-model theorem layers are additive exports through
   `Interfaces.lean`; they do not change the argument order or meaning of the
   original M0/M1/M2/M3 interface declarations.
+- `WeightFunction.ReflectionNullEquivalent` is a relation-level predicate for
+  null representatives.  It does not construct the quotient or a
+  `GNSReconstruction`; it only names the hypothesis consumed by
+  `WeightFunction.pairingForm_respects_null_equivalent`.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
