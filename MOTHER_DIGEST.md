@@ -97,8 +97,11 @@ reconstruction theorems.
 
 File: `OSPositivity/BondModel.lean`
 
+- `LatticeReflection.DependsOnlyOn.zero`
 - `LatticeReflection.DependsOnlyOn.add`
 - `LatticeReflection.DependsOnlyOn.smul`
+- `LatticeReflection.DependsOnlyOn.neg`
+- `LatticeReflection.DependsOnlyOn.sub`
 - `bondReflection`
 - `bondWeight`
 - `eval_of_dependsOnlyOn_true`
@@ -124,7 +127,9 @@ Main hypotheses to supply for `bond_reflectionPositive`:
 Smallest consumption target: instantiate `isingBond_reflectionPositive` when the
 mother repo needs a no-certificate finite bond RP example, or use
 `psd_of_bond_reflectionPositive` to recover the PSD obligation from an RP
-certificate in tests.
+certificate in tests.  Use the `DependsOnlyOn` closure helpers to keep
+positive-side locality obligations stable when forming zero observables, linear
+combinations, and nullspace differences such as `F - G`.
 
 ### Certificate interfaces
 

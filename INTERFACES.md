@@ -59,8 +59,11 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.ReflectionNullContext.symm`
 - `WeightFunction.ReflectionNullContext.trans`
 - `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
+- `LatticeReflection.DependsOnlyOn.zero`
 - `LatticeReflection.DependsOnlyOn.add`
 - `LatticeReflection.DependsOnlyOn.smul`
+- `LatticeReflection.DependsOnlyOn.neg`
+- `LatticeReflection.DependsOnlyOn.sub`
 - `bondReflection`
 - `bondWeight`
 - `eval_of_dependsOnlyOn_true`
@@ -125,6 +128,9 @@ order below is a breaking change for the mother repository.
   and span-positivity hypotheses for relation-level null bookkeeping.  Its
   methods are wrappers around the existing null-equivalence and pairing-form
   lemmas; they do not construct quotient data.
+- `LatticeReflection.DependsOnlyOn.zero`, `.neg`, and `.sub` are additive
+  closure helpers for positive-side observables; they support nullspace
+  bookkeeping over differences without changing existing argument order.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
