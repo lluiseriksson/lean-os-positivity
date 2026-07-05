@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-04
+Date: 2026-07-05
 
 ## Lean `sorry` count
 
@@ -50,10 +50,11 @@ Pairing-form layer (`PairingForm.lean`):
 * `ReflectionNullEquivalent` and `pairingForm_respects_null_equivalent`: a named
   null-representative relation plus the combined well-definedness bridge
   packaged over that relation.  This still does not construct the quotient.
-* `reflectionNullEquivalent_refl`, `reflectionNullEquivalent_symm`: elementary
-  bookkeeping facts for the named null-representative relation.  Transitivity
-  remains a separate bridge because it needs the explicit positivity/span
-  hypotheses that kill the cross term.
+* `reflectionNullEquivalent_refl`, `reflectionNullEquivalent_symm`,
+  `reflectionNullEquivalent_trans`: bookkeeping facts for the named
+  null-representative relation.  Transitivity is proved under the explicit
+  reflection-invariance and positivity/span hypotheses that kill the cross
+  term.
 
 Bond-model layer (`BondModel.lean`):
 
@@ -92,6 +93,12 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 (multi-bond statement above), the
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
+
+Next small bridge: package the fixed hypotheses around
+`ReflectionNullEquivalent` into a reusable relation-level helper so downstream
+well-definedness proofs can consume `refl`/`symm`/`trans` without restating the
+same assumptions at every call site.  This should still stop before quotient or
+`GNSReconstruction` construction.
 
 ## Frontier branch policy
 
