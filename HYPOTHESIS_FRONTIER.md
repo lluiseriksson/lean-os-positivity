@@ -71,6 +71,9 @@ Bond-model layer (`BondModel.lean`):
 
 * `DependsOnlyOn.add`, `DependsOnlyOn.smul`: half-space observables form a
   complex subspace (closure needed to feed Cauchy-Schwarz from RP).
+* `LatticeReflection.reflectionPositive_add_smul`: a generic span
+  nonnegativity helper, deriving the `F + b • G` Cauchy-Schwarz input directly
+  from lattice reflection positivity and two positive-side locality proofs.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
@@ -105,10 +108,10 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: derive a `ReflectionNullContext` from a concrete finite
-model whose positive-observable class is a proper closed subspace under
-addition and scalar multiplication.  This should still stop before quotient or
-`GNSReconstruction` construction.
+Next small bridge: use `LatticeReflection.reflectionPositive_add_smul` plus
+`DependsOnlyOn.sub` to feed a one-sided null-representative lemma for a concrete
+finite model whose positive-observable class is a proper closed subspace.  This
+should still stop before quotient or `GNSReconstruction` construction.
 
 ## Frontier branch policy
 
