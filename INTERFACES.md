@@ -59,6 +59,8 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.ReflectionNullContext.refl`
 - `WeightFunction.ReflectionNullContext.symm`
 - `WeightFunction.ReflectionNullContext.trans`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null_left`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null_right`
 - `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 - `LatticeReflection.DependsOnlyOn.zero`
 - `LatticeReflection.DependsOnlyOn.add`
@@ -132,6 +134,9 @@ order below is a breaking change for the mother repository.
 - `WeightFunction.reflectionNullContext_of_reflectionPositive_univ` builds that
   packaged context from `Expectation.ReflectionPositive ... Set.univ`, for
   finite models where the full observable class is admissible.
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null_left` and
+  `.pairingForm_respects_null_right` are one-sided context wrappers for changing
+  only the left or right null representative.
 - `LatticeReflection.DependsOnlyOn.zero`, `.neg`, and `.sub` are additive
   closure helpers for positive-side observables; they support nullspace
   bookkeeping over differences without changing existing argument order.

@@ -62,6 +62,10 @@ Pairing-form layer (`PairingForm.lean`):
   null bookkeeping.  This removes repeated hypotheses at downstream call sites
   but still does not construct quotient data.  The `Set.univ` constructor covers
   finite models where every observable is admissible.
+* `ReflectionNullContext.pairingForm_respects_null_left` and
+  `ReflectionNullContext.pairingForm_respects_null_right`: one-sided wrappers
+  for changing only the left or right null representative under the same
+  packaged hypotheses.
 
 Bond-model layer (`BondModel.lean`):
 

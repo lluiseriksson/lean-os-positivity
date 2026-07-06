@@ -74,6 +74,8 @@ File: `OSPositivity/PairingForm.lean`
 - `WeightFunction.ReflectionNullContext.refl`
 - `WeightFunction.ReflectionNullContext.symm`
 - `WeightFunction.ReflectionNullContext.trans`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null_left`
+- `WeightFunction.ReflectionNullContext.pairingForm_respects_null_right`
 - `WeightFunction.ReflectionNullContext.pairingForm_respects_null`
 
 Main hypotheses to supply for `normSq_pairingForm_le`:
@@ -93,7 +95,8 @@ invariance and span positivity are fixed once for the model, then call
 hypotheses at every null-relation step.  If the model has
 `Expectation.ReflectionPositive ... Set.univ`, build the context with
 `WeightFunction.reflectionNullContext_of_reflectionPositive_univ`.  Use the
-one-sided lemmas when only one representative changes.  These only support
+context one-sided lemmas when only the left or right representative changes;
+use the combined lemma when both representatives change.  These only support
 well-definedness; they are not GNS reconstruction theorems.
 
 ### Single-bond model
