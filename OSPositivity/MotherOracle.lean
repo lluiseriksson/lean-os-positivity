@@ -19,6 +19,9 @@ consumer is likely to use before quotient construction.
 
 The second section checks the inequality/null-absorption names that appear when
 the consumer starts proving quotient well-definedness obligations.
+
+The lattice section checks the positive-side locality closure and span
+nonnegativity helpers that feed those pairing-form hypotheses.
 -/
 
 noncomputable section
@@ -27,7 +30,7 @@ namespace OSPositivity
 
 open scoped ComplexConjugate
 
-universe u
+universe u v
 
 section PairingFormAlgebraOracle
 
@@ -137,11 +140,85 @@ example
 
 end PairingFormInequalityOracle
 
+section LatticeReflectionSpanOracle
+
+variable {Site : Type u} {Spin : Type v}
+variable [Fintype (Configuration Site Spin)]
+variable {r : LatticeReflection Site}
+variable {mu : FiniteProbability (Configuration Site Spin)}
+variable {F F₁ F₂ G : LatticeObservable Site Spin} {b : Complex}
+
+example :
+    LatticeReflection.DependsOnlyOn r.positiveSide
+      (0 : LatticeObservable Site Spin) :=
+  LatticeReflection.DependsOnlyOn.zero r.positiveSide
+
+example
+    (hF : LatticeReflection.DependsOnlyOn r.positiveSide F)
+    (hG : LatticeReflection.DependsOnlyOn r.positiveSide G) :
+    LatticeReflection.DependsOnlyOn r.positiveSide (F + G) :=
+  LatticeReflection.DependsOnlyOn.add hF hG
+
+example
+    (hF : LatticeReflection.DependsOnlyOn r.positiveSide F) :
+    LatticeReflection.DependsOnlyOn r.positiveSide (b • F) :=
+  LatticeReflection.DependsOnlyOn.smul b hF
+
+example
+    (hF : LatticeReflection.DependsOnlyOn r.positiveSide F) :
+    LatticeReflection.DependsOnlyOn r.positiveSide (-F) :=
+  LatticeReflection.DependsOnlyOn.neg hF
+
+example
+    (hF : LatticeReflection.DependsOnlyOn r.positiveSide F)
+    (hG : LatticeReflection.DependsOnlyOn r.positiveSide G) :
+    LatticeReflection.DependsOnlyOn r.positiveSide (F - G) :=
+  LatticeReflection.DependsOnlyOn.sub hF hG
+
+example
+    (hRP : r.ReflectionPositive mu)
+    (hF : LatticeReflection.DependsOnlyOn r.positiveSide F)
+    (hG : LatticeReflection.DependsOnlyOn r.positiveSide G) :
+    ComplexNonnegative
+      (Expectation.reflectionForm mu.toExpectation
+        (r.mapConfig : Configuration Site Spin -> Configuration Site Spin)
+        (F + b • G)) :=
+  LatticeReflection.reflectionPositive_add_smul hRP hF hG b
+
+example
+    (hRP : r.ReflectionPositive mu)
+    (hF₁ : LatticeReflection.DependsOnlyOn r.positiveSide F₁)
+    (hF₂ : LatticeReflection.DependsOnlyOn r.positiveSide F₂)
+    (hG : LatticeReflection.DependsOnlyOn r.positiveSide G) :
+    ComplexNonnegative
+      (Expectation.reflectionForm mu.toExpectation
+        (r.mapConfig : Configuration Site Spin -> Configuration Site Spin)
+        ((F₁ - F₂) + b • G)) :=
+  LatticeReflection.reflectionPositive_sub_add_smul hRP hF₁ hF₂ hG b
+
+end LatticeReflectionSpanOracle
+
 section IsingBondTrueSideOracle
 
 variable {S : Type u} [Fintype S] [DecidableEq S]
 variable {beta : Real} (hbeta : 0 <= beta)
-variable {F1 F2 G1 G2 : LatticeObservable Bool S}
+variable {F1 F2 G1 G2 : LatticeObservable Bool S} {b : Complex}
+
+example
+    (hF1 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F1)
+    (hF2 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F2)
+    (hG1 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G1) :
+    ComplexNonnegative
+      (Expectation.reflectionForm
+        (bondWeight (ferromagneticKernel beta)
+          (ferromagneticKernel_nonneg beta)).toExpectation
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S)
+        ((F1 - F2) + b • G1)) := by
+  exact isingBond_reflectionPositive_sub_add_smul hbeta
+    (by simpa [bondReflection] using hF1)
+    (by simpa [bondReflection] using hF2)
+    (by simpa [bondReflection] using hG1)
+    b
 
 example
     (hF1 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F1)
