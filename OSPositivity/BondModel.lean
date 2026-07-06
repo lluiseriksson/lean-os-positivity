@@ -504,6 +504,38 @@ theorem isingBond_pairingForm_respects_null {beta : Real} (hbeta : 0 ≤ beta)
         (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G₂ :=
         isingBond_pairingForm_respects_null_right hbeta hF₂ hG₁ hG₂ hnull_right
 
+/--
+Mother-facing oracle for the concrete single-bond null-representative
+replacement.  It exposes the same two-sided pairing-form equality as
+`isingBond_pairingForm_respects_null`, but with the locality hypotheses written
+as the literal positive site set `{true}`.
+-/
+theorem isingBond_pairingForm_respects_null_trueSide {beta : Real} (hbeta : 0 ≤ beta)
+    {F₁ F₂ G₁ G₂ : LatticeObservable Bool S}
+    (hF₁ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F₁)
+    (hF₂ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F₂)
+    (hG₁ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G₁)
+    (hG₂ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G₂)
+    (hnull_left : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ F₂)
+    (hnull_right : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) G₁ G₂) :
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ G₁
+      =
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G₂ := by
+  exact isingBond_pairingForm_respects_null hbeta
+    (by simpa [bondReflection] using hF₁)
+    (by simpa [bondReflection] using hF₂)
+    (by simpa [bondReflection] using hG₁)
+    (by simpa [bondReflection] using hG₂)
+    hnull_left hnull_right
+
 end BondModel
 
 end OSPositivity

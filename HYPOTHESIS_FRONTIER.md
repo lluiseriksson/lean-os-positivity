@@ -92,6 +92,8 @@ Bond-model layer (`BondModel.lean`):
 * `isingBond_pairingForm_respects_null`: the concrete two-sided
   ferromagnetic bond-model replacement helper, composing the left and right
   one-sided helpers under named null relations for both observable pairs.
+* `isingBond_pairingForm_respects_null_trueSide`: a mother-facing oracle wrapper
+  for the same two-sided helper with literal `{true}` locality hypotheses.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
@@ -126,8 +128,8 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: add a tiny consumer oracle or mother-facing example that
-uses `isingBond_pairingForm_respects_null` with exact null-equivalence
+Next small bridge: add a tiny mother-repository consumer test against
+`isingBond_pairingForm_respects_null_trueSide` with exact null-equivalence
 hypotheses.  This should still stop before quotient or `GNSReconstruction`
 construction.
 

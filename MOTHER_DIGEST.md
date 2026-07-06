@@ -128,6 +128,7 @@ File: `OSPositivity/BondModel.lean`
 - `isingBond_pairingForm_respects_null_left`
 - `isingBond_pairingForm_respects_null_right`
 - `isingBond_pairingForm_respects_null`
+- `isingBond_pairingForm_respects_null_trueSide`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
 
@@ -157,6 +158,10 @@ the left pairing-form representative inside the concrete bond model without a
 `isingBond_pairingForm_respects_null_right hbeta hF hG₁ hG₂ hnull`.  To replace
 both representatives in one concrete bond-model pairing form, call
 `isingBond_pairingForm_respects_null hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`.
+For oracle/tests whose locality hypotheses are already written as literal
+`({true} : Set Bool)`, call
+`isingBond_pairingForm_respects_null_trueSide hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`;
+it is only a wrapper around the concrete two-sided helper.
 
 ### Certificate interfaces
 
@@ -188,14 +193,13 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a tiny consumer oracle around
-`isingBond_pairingForm_respects_null`, showing the exact hypothesis bundle that
-THE-ERIKSSON-PROGRAMME should supply.
+The next low-risk bridge is a tiny mother-repository consumer test against
+`isingBond_pairingForm_respects_null_trueSide`, showing the exact hypothesis
+bundle that THE-ERIKSSON-PROGRAMME should supply.
 
 Expected source: concrete `{true}`-locality hypotheses plus named
 `WeightFunction.ReflectionNullEquivalent` hypotheses for the left and right
 observable pairs.
 
-Expected shape: prove only an example/oracle theorem over the existing
-bond-model helper; do not construct `GNSReconstruction` or a Hilbert quotient in
-this repository.
+Expected shape: consume the oracle theorem from the stable `Interfaces` import;
+do not construct `GNSReconstruction` or a Hilbert quotient in this repository.
