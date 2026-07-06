@@ -87,6 +87,7 @@ order below is a breaking change for the mother repository.
 - `isingBond_pairingForm_respects_null_left`
 - `isingBond_pairingForm_respects_null_right`
 - `isingBond_pairingForm_respects_null`
+- `isingBond_pairingForm_respects_null_trueSide`
 
 ## Transfer-Matrix Layer
 
@@ -164,6 +165,9 @@ order below is a breaking change for the mother repository.
   locality and named null-relation hypotheses.
 - `isingBond_pairingForm_respects_null` composes the concrete left and right
   helpers to replace both representatives under two named null relations.
+- `isingBond_pairingForm_respects_null_trueSide` exposes the same concrete
+  two-sided helper with literal `{true}`-locality hypotheses for
+  mother-repository oracle code.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
