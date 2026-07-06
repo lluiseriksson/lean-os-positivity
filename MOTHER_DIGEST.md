@@ -211,9 +211,13 @@ The same oracle file also checks the generic null-context API from
 then `WeightFunction.ReflectionNullContext.diagonal_nonnegative`, `.refl`,
 `.symm`, `.trans`, `.pairingForm_respects_null_left`,
 `.pairingForm_respects_null_right`, and `.pairingForm_respects_null`.
-This is the exact context-level bookkeeping surface for consumers that have
-full-observable reflection positivity or already have a packaged
-`WeightFunction.ReflectionNullContext w theta`.
+It also checks the direct explicit-hypothesis route
+`WeightFunction.pairingForm_respects_null_equivalent`, for consumers that have
+`Function.Involutive theta`, reflection-invariant weights, diagonal
+nonnegativity, and the two span-nonnegativity hypotheses but have not packaged
+them into a `WeightFunction.ReflectionNullContext w theta`.  These are the
+null-equivalence bookkeeping surfaces for consumers that have full-observable
+reflection positivity or fixed model-level null-equivalence inputs.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.

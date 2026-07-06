@@ -8,10 +8,11 @@ call the concrete single-bond null-representative helpers with literal `{true}`
 locality hypotheses.  It adds no public theorem; the `example`s are compile-time
 oracles for THE-ERIKSSON-PROGRAMME-shaped code.
 
-It also checks the generic `WeightFunction.ReflectionNullContext` API exposed
-through `Interfaces`, including the `Set.univ` constructor route, so consumers
-can rehearse null-equivalence bookkeeping without importing implementation
-modules.
+It also checks the generic null-equivalence API exposed through `Interfaces`.
+The examples cover both the direct explicit-hypothesis theorem
+`WeightFunction.pairingForm_respects_null_equivalent` and the packaged
+`WeightFunction.ReflectionNullContext` route, including the `Set.univ`
+constructor.
 -/
 
 noncomputable section
@@ -121,6 +122,24 @@ example
     (hGH : WeightFunction.ReflectionNullEquivalent w theta G H) :
     WeightFunction.ReflectionNullEquivalent w theta F H :=
   ctx.trans F G H hFG hGH
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hleft : WeightFunction.ReflectionNullEquivalent w theta F₁ F₂)
+    (hG₁ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G₁))
+    (hspan_left : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F₁ - F₂) + b • G₁)))
+    (hright : WeightFunction.ReflectionNullEquivalent w theta G₁ G₂)
+    (hF₂ : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F₂))
+    (hspan_right : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((G₁ - G₂) + b • F₂))) :
+    WeightFunction.pairingForm w theta F₁ G₁ =
+      WeightFunction.pairingForm w theta F₂ G₂ :=
+  WeightFunction.pairingForm_respects_null_equivalent w htheta hw
+    F₁ F₂ G₁ G₂ hleft hG₁ hspan_left hright hF₂ hspan_right
 
 example
     (hleft : WeightFunction.ReflectionNullEquivalent w theta F₁ F₂) :
