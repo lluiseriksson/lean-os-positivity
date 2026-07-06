@@ -78,6 +78,22 @@ theorem DependsOnlyOn.sub {S : Set Site} {F G : LatticeObservable Site Spin}
   intro sigma tau h
   simp only [Pi.sub_apply, hF sigma tau h, hG sigma tau h]
 
+/--
+Reflection positivity on a lattice reflection is stable on the complex span of
+two positive-side observables.  This packages the locality closure needed by
+pairing-form Cauchy-Schwarz hypotheses without constructing quotient data.
+-/
+theorem reflectionPositive_add_smul [Fintype (Configuration Site Spin)]
+    {r : LatticeReflection Site} {mu : FiniteProbability (Configuration Site Spin)}
+    (h : r.ReflectionPositive mu) {F G : LatticeObservable Site Spin}
+    (hF : DependsOnlyOn r.positiveSide F) (hG : DependsOnlyOn r.positiveSide G)
+    (b : Complex) :
+    ComplexNonnegative
+      (Expectation.reflectionForm mu.toExpectation
+        (r.mapConfig : Configuration Site Spin -> Configuration Site Spin)
+        (F + b • G)) :=
+  h (F + b • G) (DependsOnlyOn.add hF (DependsOnlyOn.smul b hG))
+
 end LatticeReflection
 
 section BondModel

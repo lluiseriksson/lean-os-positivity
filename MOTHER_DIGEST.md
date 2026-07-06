@@ -108,6 +108,7 @@ File: `OSPositivity/BondModel.lean`
 - `LatticeReflection.DependsOnlyOn.smul`
 - `LatticeReflection.DependsOnlyOn.neg`
 - `LatticeReflection.DependsOnlyOn.sub`
+- `LatticeReflection.reflectionPositive_add_smul`
 - `bondReflection`
 - `bondWeight`
 - `eval_of_dependsOnlyOn_true`
@@ -135,7 +136,11 @@ mother repo needs a no-certificate finite bond RP example, or use
 `psd_of_bond_reflectionPositive` to recover the PSD obligation from an RP
 certificate in tests.  Use the `DependsOnlyOn` closure helpers to keep
 positive-side locality obligations stable when forming zero observables, linear
-combinations, and nullspace differences such as `F - G`.
+combinations, and nullspace differences such as `F - G`.  When an existing
+`LatticeReflection.ReflectionPositive` hypothesis is available, call
+`LatticeReflection.reflectionPositive_add_smul h hF hG b` to produce the span
+nonnegativity input for `F + b • G` from exact positive-side locality proofs
+`hF` and `hG`.
 
 ### Certificate interfaces
 
@@ -173,7 +178,7 @@ downstream code can move from model reflection positivity to the packaged
 null-relation API without manual span hypotheses.
 
 Expected source: `Expectation.ReflectionPositive`,
-`LatticeReflection.DependsOnlyOn.add`/`smul`, and
+`LatticeReflection.reflectionPositive_add_smul`, and
 `WeightFunction.ReflectionNullContext`.
 
 Expected shape: prove only a model/interface helper that supplies the context;
