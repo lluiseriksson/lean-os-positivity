@@ -95,7 +95,11 @@ Bond-model layer (`BondModel.lean`):
 * `isingBond_pairingForm_respects_null_trueSide`: a mother-facing oracle wrapper
   for the same two-sided helper with literal `{true}` locality hypotheses.
 * `OSPositivity/MotherOracle.lean`: compile-time consumer oracles importing
-  only `Interfaces` and applying the concrete one-sided helpers plus
+  only `Interfaces` and applying basic pairing-form algebra
+  (`reflectionForm_eq_pairingForm`, `pairingForm_add_left`,
+  `pairingForm_add_right`, `pairingForm_smul_left`,
+  `pairingForm_smul_right`, and `pairingForm_conj_symm`), the concrete
+  one-sided helpers plus
   `isingBond_pairingForm_respects_null_trueSide` to exact `{true}` locality and
   named null-equivalence hypothesis bundles.  It also checks generic
   `WeightFunction.ReflectionNullContext` consumption via
