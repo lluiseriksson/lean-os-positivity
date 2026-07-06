@@ -19,7 +19,7 @@ theorem hypotheses.
 | File | Role | Downstream use |
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
-| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra, Cauchy-Schwarz/null-absorption helpers, and one-sided/two-sided null-representative test shapes. |
+| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra, Cauchy-Schwarz/null-absorption helpers, locality/span helpers, and one-sided/two-sided null-representative test shapes. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -239,6 +239,13 @@ Interfaces`: `WeightFunction.reflectionForm_im_eq_zero`,
 same hypotheses a mother-side smoke test must provide: `Function.Involutive
 theta`, reflection-invariant weights, diagonal nonnegativity, and the relevant
 span nonnegativity input.
+
+For the lattice-positive-side inputs to those hypotheses, the oracle checks
+`LatticeReflection.DependsOnlyOn.zero`, `.add`, `.smul`, `.neg`, and `.sub`,
+plus `LatticeReflection.reflectionPositive_add_smul`,
+`LatticeReflection.reflectionPositive_sub_add_smul`, and the concrete
+`isingBond_reflectionPositive_sub_add_smul` route with literal
+`({true} : Set Bool)` locality hypotheses.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.

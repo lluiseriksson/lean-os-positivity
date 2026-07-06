@@ -98,8 +98,14 @@ Bond-model layer (`BondModel.lean`):
   only `Interfaces` and applying basic pairing-form algebra
   (`reflectionForm_eq_pairingForm`, `pairingForm_add_left`,
   `pairingForm_add_right`, `pairingForm_smul_left`,
-  `pairingForm_smul_right`, and `pairingForm_conj_symm`), the concrete
-  one-sided helpers plus
+  `pairingForm_smul_right`, and `pairingForm_conj_symm`), quotient-obligation
+  helpers (`reflectionForm_im_eq_zero`, `pairingForm_expand`,
+  `normSq_pairingForm_le`, `pairingForm_eq_zero_of_null`, and the
+  `ReflectionNullEquivalent` `refl`/`symm`/`trans` facts), positive-side
+  locality/span helpers (`DependsOnlyOn.zero`, `.add`, `.smul`, `.neg`, `.sub`,
+  `reflectionPositive_add_smul`, `reflectionPositive_sub_add_smul`, and
+  `isingBond_reflectionPositive_sub_add_smul`), the concrete one-sided helpers
+  plus
   `isingBond_pairingForm_respects_null_trueSide` to exact `{true}` locality and
   named null-equivalence hypothesis bundles.  It also checks generic
   `WeightFunction.ReflectionNullContext` consumption via
