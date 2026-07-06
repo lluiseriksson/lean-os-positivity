@@ -518,6 +518,30 @@ theorem trans (ctx : ReflectionNullContext w theta)
     F G H hFG hGH (ctx.span_nonnegative (F - G) (G - H))
 
 /--
+Left representative replacement for the pairing form using the packaged
+null-context hypotheses.  This is relation-level data only.
+-/
+theorem pairingForm_respects_null_left (ctx : ReflectionNullContext w theta)
+    (F₁ F₂ G : Observable Omega)
+    (hnull : ReflectionNullEquivalent w theta F₁ F₂) :
+    pairingForm w theta F₁ G = pairingForm w theta F₂ G :=
+  OSPositivity.WeightFunction.pairingForm_respects_null_left w ctx.involutive
+    ctx.weight_reflectionInvariant F₁ F₂ G hnull
+    (ctx.diagonal_nonnegative G) (ctx.span_nonnegative (F₁ - F₂) G)
+
+/--
+Right representative replacement for the pairing form using the packaged
+null-context hypotheses.  This is relation-level data only.
+-/
+theorem pairingForm_respects_null_right (ctx : ReflectionNullContext w theta)
+    (F G₁ G₂ : Observable Omega)
+    (hnull : ReflectionNullEquivalent w theta G₁ G₂) :
+    pairingForm w theta F G₁ = pairingForm w theta F G₂ :=
+  OSPositivity.WeightFunction.pairingForm_respects_null_right w ctx.involutive
+    ctx.weight_reflectionInvariant F G₁ G₂ hnull
+    (ctx.diagonal_nonnegative F) (ctx.span_nonnegative (G₁ - G₂) F)
+
+/--
 Pairing-form well-definedness over null-equivalent representatives using the
 packaged hypotheses.  This is still relation-level data only.
 -/
