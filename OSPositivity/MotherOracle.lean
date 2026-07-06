@@ -107,6 +107,10 @@ example :
     WeightFunction.ReflectionNullEquivalent w theta F F :=
   ctx.refl F
 
+example :
+    ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F) :=
+  ctx.diagonal_nonnegative F
+
 example
     (hFG : WeightFunction.ReflectionNullEquivalent w theta F G) :
     WeightFunction.ReflectionNullEquivalent w theta G F :=
@@ -117,6 +121,18 @@ example
     (hGH : WeightFunction.ReflectionNullEquivalent w theta G H) :
     WeightFunction.ReflectionNullEquivalent w theta F H :=
   ctx.trans F G H hFG hGH
+
+example
+    (hleft : WeightFunction.ReflectionNullEquivalent w theta F₁ F₂) :
+    WeightFunction.pairingForm w theta F₁ G₁ =
+      WeightFunction.pairingForm w theta F₂ G₁ :=
+  ctx.pairingForm_respects_null_left F₁ F₂ G₁ hleft
+
+example
+    (hright : WeightFunction.ReflectionNullEquivalent w theta G₁ G₂) :
+    WeightFunction.pairingForm w theta F₁ G₁ =
+      WeightFunction.pairingForm w theta F₁ G₂ :=
+  ctx.pairingForm_respects_null_right F₁ G₁ G₂ hright
 
 example
     (hleft : WeightFunction.ReflectionNullEquivalent w theta F₁ F₂)
