@@ -13,13 +13,60 @@ The examples cover both the direct explicit-hypothesis theorem
 `WeightFunction.pairingForm_respects_null_equivalent` and the packaged
 `WeightFunction.ReflectionNullContext` route, including the `Set.univ`
 constructor.
+
+The first section checks the pairing-form algebra names that a downstream GNS
+consumer is likely to use before quotient construction.
 -/
 
 noncomputable section
 
 namespace OSPositivity
 
+open scoped ComplexConjugate
+
 universe u
+
+section PairingFormAlgebraOracle
+
+variable {Omega : Type u} [Fintype Omega]
+variable {w : WeightFunction Omega} {theta : Omega -> Omega}
+variable {F G H : Observable Omega} {b : Complex}
+
+example :
+    Expectation.reflectionForm w.toExpectation theta F =
+      WeightFunction.pairingForm w theta F F :=
+  WeightFunction.reflectionForm_eq_pairingForm w theta F
+
+example :
+    WeightFunction.pairingForm w theta (F + G) H =
+      WeightFunction.pairingForm w theta F H +
+        WeightFunction.pairingForm w theta G H :=
+  WeightFunction.pairingForm_add_left w theta F G H
+
+example :
+    WeightFunction.pairingForm w theta F (G + H) =
+      WeightFunction.pairingForm w theta F G +
+        WeightFunction.pairingForm w theta F H :=
+  WeightFunction.pairingForm_add_right w theta F G H
+
+example :
+    WeightFunction.pairingForm w theta (b • F) G =
+      conj b * WeightFunction.pairingForm w theta F G :=
+  WeightFunction.pairingForm_smul_left w theta b F G
+
+example :
+    WeightFunction.pairingForm w theta F (b • G) =
+      b * WeightFunction.pairingForm w theta F G :=
+  WeightFunction.pairingForm_smul_right w theta b F G
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega) :
+    WeightFunction.pairingForm w theta G F =
+      conj (WeightFunction.pairingForm w theta F G) :=
+  WeightFunction.pairingForm_conj_symm w htheta hw F G
+
+end PairingFormAlgebraOracle
 
 section IsingBondTrueSideOracle
 

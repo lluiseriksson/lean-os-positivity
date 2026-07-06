@@ -19,7 +19,7 @@ theorem hypotheses.
 | File | Role | Downstream use |
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
-| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for one-sided and two-sided bond null-representative test shapes. |
+| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra plus one-sided and two-sided null-representative test shapes. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -218,6 +218,15 @@ nonnegativity, and the two span-nonnegativity hypotheses but have not packaged
 them into a `WeightFunction.ReflectionNullContext w theta`.  These are the
 null-equivalence bookkeeping surfaces for consumers that have full-observable
 reflection positivity or fixed model-level null-equivalence inputs.
+
+Before quotient construction, the oracle also checks the basic pairing-form
+algebra names from `import Interfaces`:
+`WeightFunction.reflectionForm_eq_pairingForm`,
+`WeightFunction.pairingForm_add_left`,
+`WeightFunction.pairingForm_add_right`,
+`WeightFunction.pairingForm_smul_left`,
+`WeightFunction.pairingForm_smul_right`, and
+`WeightFunction.pairingForm_conj_symm`.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.
