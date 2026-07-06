@@ -9,8 +9,9 @@ locality hypotheses.  It adds no public theorem; the `example`s are compile-time
 oracles for THE-ERIKSSON-PROGRAMME-shaped code.
 
 It also checks the generic `WeightFunction.ReflectionNullContext` API exposed
-through `Interfaces`, so consumers can rehearse null-equivalence bookkeeping
-without importing implementation modules.
+through `Interfaces`, including the `Set.univ` constructor route, so consumers
+can rehearse null-equivalence bookkeeping without importing implementation
+modules.
 -/
 
 noncomputable section
@@ -94,6 +95,13 @@ variable {Omega : Type u} [Fintype Omega]
 variable {w : WeightFunction Omega} {theta : Omega -> Omega}
 variable (ctx : WeightFunction.ReflectionNullContext w theta)
 variable {F G H F₁ F₂ G₁ G₂ : Observable Omega}
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hRP : Expectation.ReflectionPositive w.toExpectation theta Set.univ) :
+    WeightFunction.ReflectionNullContext w theta :=
+  WeightFunction.reflectionNullContext_of_reflectionPositive_univ w htheta hw hRP
 
 example :
     WeightFunction.ReflectionNullEquivalent w theta F F :=
