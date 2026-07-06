@@ -19,7 +19,7 @@ theorem hypotheses.
 | File | Role | Downstream use |
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
-| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra plus one-sided and two-sided null-representative test shapes. |
+| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra, Cauchy-Schwarz/null-absorption helpers, and one-sided/two-sided null-representative test shapes. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -227,6 +227,18 @@ algebra names from `import Interfaces`:
 `WeightFunction.pairingForm_smul_left`,
 `WeightFunction.pairingForm_smul_right`, and
 `WeightFunction.pairingForm_conj_symm`.
+
+The oracle also checks the quotient-obligation helpers from `import
+Interfaces`: `WeightFunction.reflectionForm_im_eq_zero`,
+`WeightFunction.pairingForm_expand`,
+`WeightFunction.normSq_pairingForm_le`,
+`WeightFunction.pairingForm_eq_zero_of_null`,
+`WeightFunction.reflectionNullEquivalent_refl`,
+`WeightFunction.reflectionNullEquivalent_symm`, and
+`WeightFunction.reflectionNullEquivalent_trans`.  These examples spell out the
+same hypotheses a mother-side smoke test must provide: `Function.Involutive
+theta`, reflection-invariant weights, diagonal nonnegativity, and the relevant
+span nonnegativity input.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.

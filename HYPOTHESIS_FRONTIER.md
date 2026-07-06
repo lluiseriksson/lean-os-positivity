@@ -107,7 +107,14 @@ Bond-model layer (`BondModel.lean`):
   `refl`, `symm`, `trans`, `pairingForm_respects_null_left`,
   `pairingForm_respects_null_right`, and `pairingForm_respects_null`, plus the
   direct explicit-hypothesis
-  `WeightFunction.pairingForm_respects_null_equivalent` route.
+  `WeightFunction.pairingForm_respects_null_equivalent` route.  It also checks
+  direct consumption of `WeightFunction.reflectionForm_im_eq_zero`,
+  `WeightFunction.pairingForm_expand`,
+  `WeightFunction.normSq_pairingForm_le`,
+  `WeightFunction.pairingForm_eq_zero_of_null`,
+  `WeightFunction.reflectionNullEquivalent_refl`,
+  `WeightFunction.reflectionNullEquivalent_symm`, and
+  `WeightFunction.reflectionNullEquivalent_trans` from the root import.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
