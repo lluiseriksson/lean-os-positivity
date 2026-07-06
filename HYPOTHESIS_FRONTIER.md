@@ -92,8 +92,12 @@ Bond-model layer (`BondModel.lean`):
 * `isingBond_pairingForm_respects_null`: the concrete two-sided
   ferromagnetic bond-model replacement helper, composing the left and right
   one-sided helpers under named null relations for both observable pairs.
+* `isingBond_pairingForm_respects_null_left_trueSide` and
+  `isingBond_pairingForm_respects_null_right_trueSide`: mother-facing oracle
+  wrappers for the concrete one-sided helpers with literal `{true}` locality
+  hypotheses.
 * `isingBond_pairingForm_respects_null_trueSide`: a mother-facing oracle wrapper
-  for the same two-sided helper with literal `{true}` locality hypotheses.
+  for the two-sided helper with literal `{true}` locality hypotheses.
 * `OSPositivity/MotherOracle.lean`: compile-time consumer oracles importing
   only `Interfaces` and applying basic pairing-form algebra
   (`reflectionForm_eq_pairingForm`, `pairingForm_add_left`,
@@ -106,6 +110,8 @@ Bond-model layer (`BondModel.lean`):
   `reflectionPositive_add_smul`, `reflectionPositive_sub_add_smul`, and
   `isingBond_reflectionPositive_sub_add_smul`), the concrete one-sided helpers
   plus
+  `isingBond_pairingForm_respects_null_left_trueSide`,
+  `isingBond_pairingForm_respects_null_right_trueSide`, and
   `isingBond_pairingForm_respects_null_trueSide` to exact `{true}` locality and
   named null-equivalence hypothesis bundles.  It also checks generic
   `WeightFunction.ReflectionNullContext` consumption via
@@ -155,10 +161,11 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: mirror the concrete and context-level shapes from
-`OSPositivity/MotherOracle.lean` inside the mother repository as consumer smoke
-tests from `import Interfaces`, after selecting the target test file there.
-This should still stop before quotient or `GNSReconstruction` construction.
+Next small bridge inside this repository: add a compact status/checklist entry
+naming which concrete and context-level shapes from
+`OSPositivity/MotherOracle.lean` should be mirrored in the mother repository
+after that repo selects its Lean API smoke-test file.  This should still stop
+before quotient or `GNSReconstruction` construction.
 
 ## Frontier branch policy
 

@@ -234,11 +234,8 @@ example
     WeightFunction.pairingForm
         (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
         (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F2 G1 := by
-  exact isingBond_pairingForm_respects_null_left hbeta
-    (by simpa [bondReflection] using hF1)
-    (by simpa [bondReflection] using hF2)
-    (by simpa [bondReflection] using hG1)
-    hnull_left
+  exact isingBond_pairingForm_respects_null_left_trueSide hbeta
+    hF1 hF2 hG1 hnull_left
 
 example
     (hF1 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F1)
@@ -254,11 +251,8 @@ example
     WeightFunction.pairingForm
         (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
         (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F1 G2 := by
-  exact isingBond_pairingForm_respects_null_right hbeta
-    (by simpa [bondReflection] using hF1)
-    (by simpa [bondReflection] using hG1)
-    (by simpa [bondReflection] using hG2)
-    hnull_right
+  exact isingBond_pairingForm_respects_null_right_trueSide hbeta
+    hF1 hG1 hG2 hnull_right
 
 example
     (hF1 : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F1)
