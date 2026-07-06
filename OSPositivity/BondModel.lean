@@ -465,6 +465,45 @@ theorem isingBond_pairingForm_respects_null_right {beta : Real} (hbeta : 0 ≤ b
     hnull (isingBond_reflectionPositive hbeta F hF)
     (isingBond_reflectionPositive_sub_add_smul hbeta hG₁ hG₂ hF)
 
+/--
+Concrete two-sided representative invariance for the ferromagnetic bond-model
+pairing form.  This composes the left and right one-sided helpers under named
+null relations, without constructing quotient data.
+-/
+theorem isingBond_pairingForm_respects_null {beta : Real} (hbeta : 0 ≤ beta)
+    {F₁ F₂ G₁ G₂ : LatticeObservable Bool S}
+    (hF₁ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide F₁)
+    (hF₂ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide F₂)
+    (hG₁ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide G₁)
+    (hG₂ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide G₂)
+    (hnull_left : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ F₂)
+    (hnull_right : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) G₁ G₂) :
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ G₁
+      =
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G₂ := by
+  calc
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ G₁
+        =
+      WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G₁ :=
+        isingBond_pairingForm_respects_null_left hbeta hF₁ hF₂ hG₁ hnull_left
+    _ =
+      WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G₂ :=
+        isingBond_pairingForm_respects_null_right hbeta hF₂ hG₁ hG₂ hnull_right
+
 end BondModel
 
 end OSPositivity
