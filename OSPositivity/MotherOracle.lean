@@ -7,6 +7,10 @@ This module checks that a downstream consumer can import only `Interfaces` and
 call the concrete single-bond null-representative helpers with literal `{true}`
 locality hypotheses.  It adds no public theorem; the `example`s are compile-time
 oracles for THE-ERIKSSON-PROGRAMME-shaped code.
+
+It also checks the generic `WeightFunction.ReflectionNullContext` API exposed
+through `Interfaces`, so consumers can rehearse null-equivalence bookkeeping
+without importing implementation modules.
 -/
 
 noncomputable section
@@ -83,5 +87,36 @@ example
     hnull_left hnull_right
 
 end IsingBondTrueSideOracle
+
+section ReflectionNullContextOracle
+
+variable {Omega : Type u} [Fintype Omega]
+variable {w : WeightFunction Omega} {theta : Omega -> Omega}
+variable (ctx : WeightFunction.ReflectionNullContext w theta)
+variable {F G H F₁ F₂ G₁ G₂ : Observable Omega}
+
+example :
+    WeightFunction.ReflectionNullEquivalent w theta F F :=
+  ctx.refl F
+
+example
+    (hFG : WeightFunction.ReflectionNullEquivalent w theta F G) :
+    WeightFunction.ReflectionNullEquivalent w theta G F :=
+  ctx.symm F G hFG
+
+example
+    (hFG : WeightFunction.ReflectionNullEquivalent w theta F G)
+    (hGH : WeightFunction.ReflectionNullEquivalent w theta G H) :
+    WeightFunction.ReflectionNullEquivalent w theta F H :=
+  ctx.trans F G H hFG hGH
+
+example
+    (hleft : WeightFunction.ReflectionNullEquivalent w theta F₁ F₂)
+    (hright : WeightFunction.ReflectionNullEquivalent w theta G₁ G₂) :
+    WeightFunction.pairingForm w theta F₁ G₁ =
+      WeightFunction.pairingForm w theta F₂ G₂ :=
+  ctx.pairingForm_respects_null F₁ F₂ G₁ G₂ hleft hright
+
+end ReflectionNullContextOracle
 
 end OSPositivity
