@@ -84,6 +84,7 @@ order below is a breaking change for the mother repository.
 - `ferromagneticKernel_psd`
 - `isingBond_reflectionPositive`
 - `isingBond_reflectionPositive_sub_add_smul`
+- `isingBond_pairingForm_respects_null_left`
 
 ## Transfer-Matrix Layer
 
@@ -153,6 +154,9 @@ order below is a breaking change for the mother repository.
 - `isingBond_reflectionPositive_sub_add_smul` is the concrete ferromagnetic
   bond-model instance of that null-difference span shape for `{true}`-local
   observables.
+- `isingBond_pairingForm_respects_null_left` packages the concrete
+  ferromagnetic bond-model inputs needed to replace the left representative in
+  the pairing form under a named null relation.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
