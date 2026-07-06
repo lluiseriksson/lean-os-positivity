@@ -16,6 +16,9 @@ constructor.
 
 The first section checks the pairing-form algebra names that a downstream GNS
 consumer is likely to use before quotient construction.
+
+The second section checks the inequality/null-absorption names that appear when
+the consumer starts proving quotient well-definedness obligations.
 -/
 
 noncomputable section
@@ -67,6 +70,72 @@ example
   WeightFunction.pairingForm_conj_symm w htheta hw F G
 
 end PairingFormAlgebraOracle
+
+section PairingFormInequalityOracle
+
+variable {Omega : Type u} [Fintype Omega]
+variable {w : WeightFunction Omega} {theta : Omega -> Omega}
+variable {F G H : Observable Omega} {b : Complex}
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega) :
+    (Expectation.reflectionForm w.toExpectation theta F).im = 0 :=
+  WeightFunction.reflectionForm_im_eq_zero w htheta hw F
+
+example :
+    WeightFunction.pairingForm w theta (F + b • G) (F + b • G)
+      = WeightFunction.pairingForm w theta F F
+        + b * WeightFunction.pairingForm w theta F G
+        + conj b * WeightFunction.pairingForm w theta G F
+        + conj b * b * WeightFunction.pairingForm w theta G G :=
+  WeightFunction.pairingForm_expand w theta F G b
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hF : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta F))
+    (hG : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G))
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta (F + b • G))) :
+    Complex.normSq (WeightFunction.pairingForm w theta F G)
+      ≤ (Expectation.reflectionForm w.toExpectation theta F).re
+        * (Expectation.reflectionForm w.toExpectation theta G).re :=
+  WeightFunction.normSq_pairingForm_le w htheta hw F G hF hG hspan
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hF_zero : Expectation.reflectionForm w.toExpectation theta F = 0)
+    (hG : ComplexNonnegative (Expectation.reflectionForm w.toExpectation theta G))
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta (F + b • G))) :
+    WeightFunction.pairingForm w theta F G = 0 :=
+  WeightFunction.pairingForm_eq_zero_of_null w htheta hw F G hF_zero hG hspan
+
+example :
+    WeightFunction.ReflectionNullEquivalent w theta F F :=
+  WeightFunction.reflectionNullEquivalent_refl w theta F
+
+example
+    (hFG : WeightFunction.ReflectionNullEquivalent w theta F G) :
+    WeightFunction.ReflectionNullEquivalent w theta G F :=
+  WeightFunction.reflectionNullEquivalent_symm w theta F G hFG
+
+example
+    (htheta : Function.Involutive theta)
+    (hw : ∀ omega, w.weight (theta omega) = w.weight omega)
+    (hFG : WeightFunction.ReflectionNullEquivalent w theta F G)
+    (hGH : WeightFunction.ReflectionNullEquivalent w theta G H)
+    (hspan : ∀ b : Complex,
+      ComplexNonnegative
+        (Expectation.reflectionForm w.toExpectation theta ((F - G) + b • (G - H)))) :
+    WeightFunction.ReflectionNullEquivalent w theta F H :=
+  WeightFunction.reflectionNullEquivalent_trans w htheta hw F G H hFG hGH hspan
+
+end PairingFormInequalityOracle
 
 section IsingBondTrueSideOracle
 
