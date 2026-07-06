@@ -161,11 +161,11 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge inside this repository: add a compact status/checklist entry
-naming which concrete and context-level shapes from
-`OSPositivity/MotherOracle.lean` should be mirrored in the mother repository
-after that repo selects its Lean API smoke-test file.  This should still stop
-before quotient or `GNSReconstruction` construction.
+Next small bridge: downstream only.  The in-repo checklist now lives in
+`MOTHER_CONSUMPTION_CHECKLIST.md`; after the mother repository selects its Lean
+API smoke-test file, copy one oracle section at a time from
+`OSPositivity/MotherOracle.lean`.  This should still stop before quotient or
+`GNSReconstruction` construction.
 
 ## Frontier branch policy
 
