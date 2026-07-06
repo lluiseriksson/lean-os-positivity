@@ -99,8 +99,9 @@ Bond-model layer (`BondModel.lean`):
   `isingBond_pairingForm_respects_null_trueSide` to exact `{true}` locality and
   named null-equivalence hypothesis bundles.  It also checks generic
   `WeightFunction.ReflectionNullContext` consumption via
-  `reflectionNullContext_of_reflectionPositive_univ`, `refl`, `symm`, `trans`,
-  and `pairingForm_respects_null`.
+  `reflectionNullContext_of_reflectionPositive_univ`, `diagonal_nonnegative`,
+  `refl`, `symm`, `trans`, `pairingForm_respects_null_left`,
+  `pairingForm_respects_null_right`, and `pairingForm_respects_null`.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
