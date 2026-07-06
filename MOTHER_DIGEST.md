@@ -19,7 +19,7 @@ theorem hypotheses.
 | File | Role | Downstream use |
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
-| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for a bond null-representative test shape. |
+| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for one-sided and two-sided bond null-representative test shapes. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -194,14 +194,16 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Consumer oracle
 
-`OSPositivity/MotherOracle.lean` now contains a compile-time `example` that
-imports only `Interfaces` and calls
+`OSPositivity/MotherOracle.lean` now contains compile-time `example`s that
+import only `Interfaces` and call
+`isingBond_pairingForm_respects_null_left`,
+`isingBond_pairingForm_respects_null_right`, and
 `isingBond_pairingForm_respects_null_trueSide`, showing the exact hypothesis
-bundle that THE-ERIKSSON-PROGRAMME should supply.
+bundles that THE-ERIKSSON-PROGRAMME should supply.
 
 Source shape: concrete `{true}`-locality hypotheses plus named
-`WeightFunction.ReflectionNullEquivalent` hypotheses for the left and right
-observable pairs.
+`WeightFunction.ReflectionNullEquivalent` hypotheses for either one changed
+observable pair or both changed observable pairs.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.

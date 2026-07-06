@@ -94,9 +94,10 @@ Bond-model layer (`BondModel.lean`):
   one-sided helpers under named null relations for both observable pairs.
 * `isingBond_pairingForm_respects_null_trueSide`: a mother-facing oracle wrapper
   for the same two-sided helper with literal `{true}` locality hypotheses.
-* `OSPositivity/MotherOracle.lean`: a compile-time consumer oracle importing
-  only `Interfaces` and applying `isingBond_pairingForm_respects_null_trueSide`
-  to the exact `{true}` locality and named null-equivalence hypothesis bundle.
+* `OSPositivity/MotherOracle.lean`: compile-time consumer oracles importing
+  only `Interfaces` and applying the concrete one-sided helpers plus
+  `isingBond_pairingForm_respects_null_trueSide` to exact `{true}` locality and
+  named null-equivalence hypothesis bundles.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
