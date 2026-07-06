@@ -77,6 +77,9 @@ Bond-model layer (`BondModel.lean`):
 * `LatticeReflection.reflectionPositive_sub_add_smul`: the corresponding
   null-difference helper for `((F₁ - F₂) + b • G)`, using positive-side
   locality of `F₁`, `F₂`, and `G`.
+* `isingBond_reflectionPositive_sub_add_smul`: the concrete ferromagnetic
+  bond-model span nonnegativity helper for `((F₁ - F₂) + b • G)`, obtained from
+  `isingBond_reflectionPositive` and positive-side locality closure.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
@@ -111,10 +114,10 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: consume `LatticeReflection.reflectionPositive_sub_add_smul`
-at a concrete finite-model call site that needs a one-sided
-null-representative span hypothesis.  This should still stop before quotient or
-`GNSReconstruction` construction.
+Next small bridge: decide whether `ReflectionNullContext` needs a
+positive-observable subspace parameter so bond-model null-representative calls
+can avoid the current `Set.univ` constructor limitation.  This should still
+stop before quotient or `GNSReconstruction` construction.
 
 ## Frontier branch policy
 
