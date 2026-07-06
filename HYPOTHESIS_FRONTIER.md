@@ -101,7 +101,9 @@ Bond-model layer (`BondModel.lean`):
   `WeightFunction.ReflectionNullContext` consumption via
   `reflectionNullContext_of_reflectionPositive_univ`, `diagonal_nonnegative`,
   `refl`, `symm`, `trans`, `pairingForm_respects_null_left`,
-  `pairingForm_respects_null_right`, and `pairingForm_respects_null`.
+  `pairingForm_respects_null_right`, and `pairingForm_respects_null`, plus the
+  direct explicit-hypothesis
+  `WeightFunction.pairingForm_respects_null_equivalent` route.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
