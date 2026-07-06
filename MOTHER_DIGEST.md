@@ -125,6 +125,7 @@ File: `OSPositivity/BondModel.lean`
 - `ferromagneticKernel_psd`
 - `isingBond_reflectionPositive`
 - `isingBond_reflectionPositive_sub_add_smul`
+- `isingBond_pairingForm_respects_null_left`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
 
@@ -146,7 +147,11 @@ nonnegativity input for `F + b • G` from exact positive-side locality proofs
 `LatticeReflection.reflectionPositive_sub_add_smul h hF₁ hF₂ hG b` to produce
 the input for `(F₁ - F₂) + b • G`.  In the concrete ferromagnetic bond model,
 call `isingBond_reflectionPositive_sub_add_smul hbeta hF₁ hF₂ hG b` for that
-same span shape without manually re-invoking the model RP theorem.
+same span shape without manually re-invoking the model RP theorem.  When the
+null relation for `F₁` and `F₂` is already known, call
+`isingBond_pairingForm_respects_null_left hbeta hF₁ hF₂ hG hnull` to replace
+the left pairing-form representative inside the concrete bond model without a
+`Set.univ` null context.
 
 ### Certificate interfaces
 
@@ -178,11 +183,9 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is to identify whether the existing
-`ReflectionNullContext` should be generalized to carry a proper
-positive-observable subspace, now that
-`isingBond_reflectionPositive_sub_add_smul` supplies the concrete finite-bond
-span input for one-sided null-representative replacement.
+The next low-risk bridge is the symmetric concrete bond-model helper for right
+representative replacement, parallel to
+`isingBond_pairingForm_respects_null_left`.
 
 Expected source: `Expectation.ReflectionPositive`,
 `LatticeReflection.reflectionPositive_add_smul`, and
