@@ -127,6 +127,7 @@ File: `OSPositivity/BondModel.lean`
 - `isingBond_reflectionPositive_sub_add_smul`
 - `isingBond_pairingForm_respects_null_left`
 - `isingBond_pairingForm_respects_null_right`
+- `isingBond_pairingForm_respects_null`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
 
@@ -153,7 +154,9 @@ null relation for `F₁` and `F₂` is already known, call
 `isingBond_pairingForm_respects_null_left hbeta hF₁ hF₂ hG hnull` to replace
 the left pairing-form representative inside the concrete bond model without a
 `Set.univ` null context.  For the symmetric right-side replacement, call
-`isingBond_pairingForm_respects_null_right hbeta hF hG₁ hG₂ hnull`.
+`isingBond_pairingForm_respects_null_right hbeta hF hG₁ hG₂ hnull`.  To replace
+both representatives in one concrete bond-model pairing form, call
+`isingBond_pairingForm_respects_null hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`.
 
 ### Certificate interfaces
 
@@ -185,15 +188,14 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is a combined concrete bond-model helper that changes
-both pairing-form representatives by composing
-`isingBond_pairingForm_respects_null_left` and
-`isingBond_pairingForm_respects_null_right`.
+The next low-risk bridge is a tiny consumer oracle around
+`isingBond_pairingForm_respects_null`, showing the exact hypothesis bundle that
+THE-ERIKSSON-PROGRAMME should supply.
 
-Expected source: the two one-sided concrete helpers plus named
+Expected source: concrete `{true}`-locality hypotheses plus named
 `WeightFunction.ReflectionNullEquivalent` hypotheses for the left and right
 observable pairs.
 
-Expected shape: prove only a model/interface helper that supplies the concrete
-bond-model inputs; do not construct `GNSReconstruction` or a Hilbert quotient in
+Expected shape: prove only an example/oracle theorem over the existing
+bond-model helper; do not construct `GNSReconstruction` or a Hilbert quotient in
 this repository.

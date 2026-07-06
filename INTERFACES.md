@@ -86,6 +86,7 @@ order below is a breaking change for the mother repository.
 - `isingBond_reflectionPositive_sub_add_smul`
 - `isingBond_pairingForm_respects_null_left`
 - `isingBond_pairingForm_respects_null_right`
+- `isingBond_pairingForm_respects_null`
 
 ## Transfer-Matrix Layer
 
@@ -161,6 +162,8 @@ order below is a breaking change for the mother repository.
 - `isingBond_pairingForm_respects_null_right` is the symmetric concrete helper
   for replacing only the right representative under the same positive-side
   locality and named null-relation hypotheses.
+- `isingBond_pairingForm_respects_null` composes the concrete left and right
+  helpers to replace both representatives under two named null relations.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
