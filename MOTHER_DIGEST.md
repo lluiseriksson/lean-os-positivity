@@ -19,6 +19,7 @@ theorem hypotheses.
 | File | Role | Downstream use |
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
+| `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for a bond null-representative test shape. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -191,15 +192,22 @@ Smallest consumption target: pass `TransferMatrixReflectionCertificate` or
 `WilsonRPCertificate` explicitly.  Do not treat these certificates as proved by
 this repo unless a theorem constructs the certificate in the consuming context.
 
-## Suggested next bridge
+## Consumer oracle
 
-The next low-risk bridge is a tiny mother-repository consumer test against
+`OSPositivity/MotherOracle.lean` now contains a compile-time `example` that
+imports only `Interfaces` and calls
 `isingBond_pairingForm_respects_null_trueSide`, showing the exact hypothesis
 bundle that THE-ERIKSSON-PROGRAMME should supply.
 
-Expected source: concrete `{true}`-locality hypotheses plus named
+Source shape: concrete `{true}`-locality hypotheses plus named
 `WeightFunction.ReflectionNullEquivalent` hypotheses for the left and right
 observable pairs.
 
-Expected shape: consume the oracle theorem from the stable `Interfaces` import;
-do not construct `GNSReconstruction` or a Hilbert quotient in this repository.
+The oracle stops at pairing-form well-definedness.  It does not construct
+`GNSReconstruction` or a Hilbert quotient in this repository.
+
+## Suggested next bridge
+
+The next low-risk bridge is a status/checklist item for the mother repository:
+copy the oracle shape into THE-ERIKSSON-PROGRAMME as a consumer test from
+`import Interfaces`, after deciding where that repo keeps Lean API smoke tests.

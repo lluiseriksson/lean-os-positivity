@@ -94,6 +94,9 @@ Bond-model layer (`BondModel.lean`):
   one-sided helpers under named null relations for both observable pairs.
 * `isingBond_pairingForm_respects_null_trueSide`: a mother-facing oracle wrapper
   for the same two-sided helper with literal `{true}` locality hypotheses.
+* `OSPositivity/MotherOracle.lean`: a compile-time consumer oracle importing
+  only `Interfaces` and applying `isingBond_pairingForm_respects_null_trueSide`
+  to the exact `{true}` locality and named null-equivalence hypothesis bundle.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
@@ -128,10 +131,10 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: add a tiny mother-repository consumer test against
-`isingBond_pairingForm_respects_null_trueSide` with exact null-equivalence
-hypotheses.  This should still stop before quotient or `GNSReconstruction`
-construction.
+Next small bridge: mirror `OSPositivity/MotherOracle.lean` inside the mother
+repository as a consumer smoke test from `import Interfaces`, after selecting
+the target test file there.  This should still stop before quotient or
+`GNSReconstruction` construction.
 
 ## Frontier branch policy
 
