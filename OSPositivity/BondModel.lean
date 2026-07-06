@@ -428,6 +428,43 @@ theorem isingBond_pairingForm_respects_null_left {beta : Real} (hbeta : 0 ≤ be
     hnull (isingBond_reflectionPositive hbeta G hG)
     (isingBond_reflectionPositive_sub_add_smul hbeta hF₁ hF₂ hG)
 
+/--
+Concrete right-representative invariance for the ferromagnetic bond-model
+pairing form.  This is the symmetric one-sided helper for changing only the
+right observable under the named null relation, without constructing quotient
+data.
+-/
+theorem isingBond_pairingForm_respects_null_right {beta : Real} (hbeta : 0 ≤ beta)
+    {F G₁ G₂ : LatticeObservable Bool S}
+    (hF : LatticeReflection.DependsOnlyOn bondReflection.positiveSide F)
+    (hG₁ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide G₁)
+    (hG₂ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide G₂)
+    (hnull : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) G₁ G₂) :
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F G₁
+      =
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F G₂ := by
+  let w : WeightFunction (Configuration Bool S) :=
+    bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta)
+  have htheta :
+      Function.Involutive
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) :=
+    bondReflection.mapConfig_involutive
+  have hw :
+      ∀ sigma : Configuration Bool S,
+        w.weight (bondReflection.mapConfig sigma) = w.weight sigma := by
+    intro sigma
+    simp [w, bondWeight, LatticeReflection.mapConfig, bondReflection,
+      ferromagneticKernel_symm beta]
+  exact WeightFunction.pairingForm_respects_null_right w htheta hw F G₁ G₂
+    hnull (isingBond_reflectionPositive hbeta F hF)
+    (isingBond_reflectionPositive_sub_add_smul hbeta hG₁ hG₂ hF)
+
 end BondModel
 
 end OSPositivity

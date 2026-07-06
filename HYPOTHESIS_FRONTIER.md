@@ -85,6 +85,10 @@ Bond-model layer (`BondModel.lean`):
   assuming `{true}`-locality for `F₁`, `F₂`, and `G` plus the named null
   relation between `F₁` and `F₂`.  This avoids needing a `Set.univ` null context
   for this one-sided use case and still does not construct quotient data.
+* `isingBond_pairingForm_respects_null_right`: the symmetric concrete
+  ferromagnetic bond-model right representative replacement helper, assuming
+  `{true}`-locality for `F`, `G₁`, and `G₂` plus the named null relation between
+  `G₁` and `G₂`.
 * `bondReflection`, `bondWeight`, `eval_of_dependsOnlyOn_true`
   (factorization of half-space observables).
 * `bondQuadForm_re`, `bondQuadForm_im`,
@@ -119,9 +123,9 @@ Missing: the actual GNS quotient construction, the chain/torus geometry
 transfer-matrix import (blocked on `lean-transfer-matrix` vM1), and everything Wilson.
 Continuum limit and full OS axioms remain deliberately out of scope.
 
-Next small bridge: add the symmetric concrete bond-model helper for right
-representative replacement, parallel to `isingBond_pairingForm_respects_null_left`.
-This should still stop before quotient or `GNSReconstruction` construction.
+Next small bridge: add the combined concrete bond-model helper that changes
+both representatives by composing the left and right one-sided helpers.  This
+should still stop before quotient or `GNSReconstruction` construction.
 
 ## Frontier branch policy
 

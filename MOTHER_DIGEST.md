@@ -126,6 +126,7 @@ File: `OSPositivity/BondModel.lean`
 - `isingBond_reflectionPositive`
 - `isingBond_reflectionPositive_sub_add_smul`
 - `isingBond_pairingForm_respects_null_left`
+- `isingBond_pairingForm_respects_null_right`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
 
@@ -151,7 +152,8 @@ same span shape without manually re-invoking the model RP theorem.  When the
 null relation for `F₁` and `F₂` is already known, call
 `isingBond_pairingForm_respects_null_left hbeta hF₁ hF₂ hG hnull` to replace
 the left pairing-form representative inside the concrete bond model without a
-`Set.univ` null context.
+`Set.univ` null context.  For the symmetric right-side replacement, call
+`isingBond_pairingForm_respects_null_right hbeta hF hG₁ hG₂ hnull`.
 
 ### Certificate interfaces
 
@@ -183,13 +185,15 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is the symmetric concrete bond-model helper for right
-representative replacement, parallel to
-`isingBond_pairingForm_respects_null_left`.
+The next low-risk bridge is a combined concrete bond-model helper that changes
+both pairing-form representatives by composing
+`isingBond_pairingForm_respects_null_left` and
+`isingBond_pairingForm_respects_null_right`.
 
-Expected source: `Expectation.ReflectionPositive`,
-`LatticeReflection.reflectionPositive_add_smul`, and
-`WeightFunction.ReflectionNullContext`.
+Expected source: the two one-sided concrete helpers plus named
+`WeightFunction.ReflectionNullEquivalent` hypotheses for the left and right
+observable pairs.
 
-Expected shape: prove only a model/interface helper that supplies the context;
-do not construct `GNSReconstruction` or a Hilbert quotient in this repository.
+Expected shape: prove only a model/interface helper that supplies the concrete
+bond-model inputs; do not construct `GNSReconstruction` or a Hilbert quotient in
+this repository.
