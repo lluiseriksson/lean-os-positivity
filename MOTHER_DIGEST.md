@@ -129,6 +129,8 @@ File: `OSPositivity/BondModel.lean`
 - `isingBond_pairingForm_respects_null_left`
 - `isingBond_pairingForm_respects_null_right`
 - `isingBond_pairingForm_respects_null`
+- `isingBond_pairingForm_respects_null_left_trueSide`
+- `isingBond_pairingForm_respects_null_right_trueSide`
 - `isingBond_pairingForm_respects_null_trueSide`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
@@ -161,8 +163,13 @@ both representatives in one concrete bond-model pairing form, call
 `isingBond_pairingForm_respects_null hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`.
 For oracle/tests whose locality hypotheses are already written as literal
 `({true} : Set Bool)`, call
-`isingBond_pairingForm_respects_null_trueSide hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`;
-it is only a wrapper around the concrete two-sided helper.
+`isingBond_pairingForm_respects_null_left_trueSide hbeta hF₁ hF₂ hG hnull_left`
+or
+`isingBond_pairingForm_respects_null_right_trueSide hbeta hF hG₁ hG₂ hnull_right`
+when only one representative changes.  Call
+`isingBond_pairingForm_respects_null_trueSide hbeta hF₁ hF₂ hG₁ hG₂ hnull_left hnull_right`
+when both sides change.  These are only wrappers around the concrete
+representative helpers.
 
 ### Certificate interfaces
 
@@ -198,6 +205,8 @@ this repo unless a theorem constructs the certificate in the consuming context.
 import only `Interfaces` and call
 `isingBond_pairingForm_respects_null_left`,
 `isingBond_pairingForm_respects_null_right`, and
+`isingBond_pairingForm_respects_null_left_trueSide`,
+`isingBond_pairingForm_respects_null_right_trueSide`, and
 `isingBond_pairingForm_respects_null_trueSide`, showing the exact hypothesis
 bundles that THE-ERIKSSON-PROGRAMME should supply.
 
@@ -252,6 +261,7 @@ The oracle stops at pairing-form well-definedness.  It does not construct
 
 ## Suggested next bridge
 
-The next low-risk bridge is a status/checklist item for the mother repository:
-copy the oracle shape into THE-ERIKSSON-PROGRAMME as a consumer test from
-`import Interfaces`, after deciding where that repo keeps Lean API smoke tests.
+The next low-risk bridge inside this repository is a compact status/checklist
+entry naming which `OSPositivity/MotherOracle.lean` sections should be copied
+into THE-ERIKSSON-PROGRAMME after that repo chooses its Lean API smoke-test
+file.  Do not edit the mother repository from this satellite.

@@ -505,10 +505,66 @@ theorem isingBond_pairingForm_respects_null {beta : Real} (hbeta : 0 ≤ beta)
         isingBond_pairingForm_respects_null_right hbeta hF₂ hG₁ hG₂ hnull_right
 
 /--
-Mother-facing oracle for the concrete single-bond null-representative
-replacement.  It exposes the same two-sided pairing-form equality as
-`isingBond_pairingForm_respects_null`, but with the locality hypotheses written
-as the literal positive site set `{true}`.
+Mother-facing oracle for the concrete single-bond left-representative
+replacement.  It exposes the same one-sided pairing-form equality as
+`isingBond_pairingForm_respects_null_left`, but with the locality hypotheses
+written as the literal positive site set `{true}`.
+-/
+theorem isingBond_pairingForm_respects_null_left_trueSide {beta : Real}
+    (hbeta : 0 ≤ beta)
+    {F₁ F₂ G : LatticeObservable Bool S}
+    (hF₁ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F₁)
+    (hF₂ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F₂)
+    (hG : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G)
+    (hnull : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ F₂) :
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₁ G
+      =
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F₂ G := by
+  exact isingBond_pairingForm_respects_null_left hbeta
+    (by simpa [bondReflection] using hF₁)
+    (by simpa [bondReflection] using hF₂)
+    (by simpa [bondReflection] using hG)
+    hnull
+
+/--
+Mother-facing oracle for the concrete single-bond right-representative
+replacement.  It exposes the same one-sided pairing-form equality as
+`isingBond_pairingForm_respects_null_right`, but with the locality hypotheses
+written as the literal positive site set `{true}`.
+-/
+theorem isingBond_pairingForm_respects_null_right_trueSide {beta : Real}
+    (hbeta : 0 ≤ beta)
+    {F G₁ G₂ : LatticeObservable Bool S}
+    (hF : LatticeReflection.DependsOnlyOn ({true} : Set Bool) F)
+    (hG₁ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G₁)
+    (hG₂ : LatticeReflection.DependsOnlyOn ({true} : Set Bool) G₂)
+    (hnull : WeightFunction.ReflectionNullEquivalent
+      (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+      (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) G₁ G₂) :
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F G₁
+      =
+    WeightFunction.pairingForm
+        (bondWeight (ferromagneticKernel beta) (ferromagneticKernel_nonneg beta))
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S) F G₂ := by
+  exact isingBond_pairingForm_respects_null_right hbeta
+    (by simpa [bondReflection] using hF)
+    (by simpa [bondReflection] using hG₁)
+    (by simpa [bondReflection] using hG₂)
+    hnull
+
+/--
+Mother-facing oracle for the concrete single-bond two-sided
+null-representative replacement.  It exposes the same two-sided pairing-form
+equality as `isingBond_pairingForm_respects_null`, but with the locality
+hypotheses written as the literal positive site set `{true}`.
 -/
 theorem isingBond_pairingForm_respects_null_trueSide {beta : Real} (hbeta : 0 ≤ beta)
     {F₁ F₂ G₁ G₂ : LatticeObservable Bool S}
