@@ -206,10 +206,12 @@ Source shape: concrete `{true}`-locality hypotheses plus named
 observable pair or both changed observable pairs.
 
 The same oracle file also checks the generic null-context API from
-`import Interfaces`: `WeightFunction.ReflectionNullContext.refl`,
-`.symm`, `.trans`, and `.pairingForm_respects_null`.  This is the exact
-context-level bookkeeping surface for consumers that already have a packaged
-`WeightFunction.ReflectionNullContext w theta`.
+`import Interfaces`: construction by
+`WeightFunction.reflectionNullContext_of_reflectionPositive_univ`,
+then `WeightFunction.ReflectionNullContext.refl`, `.symm`, `.trans`,
+and `.pairingForm_respects_null`.  This is the exact context-level bookkeeping
+surface for consumers that have full-observable reflection positivity or
+already have a packaged `WeightFunction.ReflectionNullContext w theta`.
 
 The oracle stops at pairing-form well-definedness.  It does not construct
 `GNSReconstruction` or a Hilbert quotient in this repository.
