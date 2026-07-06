@@ -94,6 +94,23 @@ theorem reflectionPositive_add_smul [Fintype (Configuration Site Spin)]
         (F + b • G)) :=
   h (F + b • G) (DependsOnlyOn.add hF (DependsOnlyOn.smul b hG))
 
+/--
+Reflection positivity supplies the span nonnegativity input for a positive-side
+observable difference plus a complex multiple of another positive-side
+observable.  This is the shape used by one-sided null-representative lemmas.
+-/
+theorem reflectionPositive_sub_add_smul [Fintype (Configuration Site Spin)]
+    {r : LatticeReflection Site} {mu : FiniteProbability (Configuration Site Spin)}
+    (h : r.ReflectionPositive mu) {F₁ F₂ G : LatticeObservable Site Spin}
+    (hF₁ : DependsOnlyOn r.positiveSide F₁) (hF₂ : DependsOnlyOn r.positiveSide F₂)
+    (hG : DependsOnlyOn r.positiveSide G) (b : Complex) :
+    ComplexNonnegative
+      (Expectation.reflectionForm mu.toExpectation
+        (r.mapConfig : Configuration Site Spin -> Configuration Site Spin)
+        ((F₁ - F₂) + b • G)) :=
+  h ((F₁ - F₂) + b • G)
+    (DependsOnlyOn.add (DependsOnlyOn.sub hF₁ hF₂) (DependsOnlyOn.smul b hG))
+
 end LatticeReflection
 
 section BondModel

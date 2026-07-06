@@ -68,6 +68,7 @@ order below is a breaking change for the mother repository.
 - `LatticeReflection.DependsOnlyOn.neg`
 - `LatticeReflection.DependsOnlyOn.sub`
 - `LatticeReflection.reflectionPositive_add_smul`
+- `LatticeReflection.reflectionPositive_sub_add_smul`
 - `bondReflection`
 - `bondWeight`
 - `eval_of_dependsOnlyOn_true`
@@ -145,6 +146,9 @@ order below is a breaking change for the mother repository.
   nonnegativity call for two positive-side observables under an existing
   lattice reflection-positivity hypothesis; it is a helper for pairing-form
   hypotheses, not a reconstruction theorem.
+- `LatticeReflection.reflectionPositive_sub_add_smul` gives the same
+  nonnegativity input for `(F₁ - F₂) + b • G`, the exact shape consumed by
+  one-sided null-representative lemmas.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.

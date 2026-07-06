@@ -1,6 +1,6 @@
 # Mother-facing digest
 
-Date: 2026-07-05.
+Date: 2026-07-06.
 
 This digest is for `THE-ERIKSSON-PROGRAMME` consumers that need the current
 Lean interface without reading every implementation module.  The stable
@@ -109,6 +109,7 @@ File: `OSPositivity/BondModel.lean`
 - `LatticeReflection.DependsOnlyOn.neg`
 - `LatticeReflection.DependsOnlyOn.sub`
 - `LatticeReflection.reflectionPositive_add_smul`
+- `LatticeReflection.reflectionPositive_sub_add_smul`
 - `bondReflection`
 - `bondWeight`
 - `eval_of_dependsOnlyOn_true`
@@ -140,7 +141,9 @@ combinations, and nullspace differences such as `F - G`.  When an existing
 `LatticeReflection.ReflectionPositive` hypothesis is available, call
 `LatticeReflection.reflectionPositive_add_smul h hF hG b` to produce the span
 nonnegativity input for `F + b • G` from exact positive-side locality proofs
-`hF` and `hG`.
+`hF` and `hG`.  For null-representative differences, call
+`LatticeReflection.reflectionPositive_sub_add_smul h hF₁ hF₂ hG b` to produce
+the input for `(F₁ - F₂) + b • G`.
 
 ### Certificate interfaces
 
@@ -172,10 +175,11 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is to derive a `ReflectionNullContext` from a concrete
-closed positive-observable class smaller than `Set.univ` in a finite model, so
-downstream code can move from model reflection positivity to the packaged
-null-relation API without manual span hypotheses.
+The next low-risk bridge is to use
+`LatticeReflection.reflectionPositive_sub_add_smul` at a concrete finite-model
+call site that needs one-sided null-representative replacement, then identify
+whether the existing `ReflectionNullContext` should be generalized to carry a
+proper positive-observable subspace.
 
 Expected source: `Expectation.ReflectionPositive`,
 `LatticeReflection.reflectionPositive_add_smul`, and
