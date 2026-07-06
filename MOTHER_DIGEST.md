@@ -124,6 +124,7 @@ File: `OSPositivity/BondModel.lean`
 - `ferromagneticKernel_symm`
 - `ferromagneticKernel_psd`
 - `isingBond_reflectionPositive`
+- `isingBond_reflectionPositive_sub_add_smul`
 
 Main hypotheses to supply for `bond_reflectionPositive`:
 
@@ -143,7 +144,9 @@ combinations, and nullspace differences such as `F - G`.  When an existing
 nonnegativity input for `F + b • G` from exact positive-side locality proofs
 `hF` and `hG`.  For null-representative differences, call
 `LatticeReflection.reflectionPositive_sub_add_smul h hF₁ hF₂ hG b` to produce
-the input for `(F₁ - F₂) + b • G`.
+the input for `(F₁ - F₂) + b • G`.  In the concrete ferromagnetic bond model,
+call `isingBond_reflectionPositive_sub_add_smul hbeta hF₁ hF₂ hG b` for that
+same span shape without manually re-invoking the model RP theorem.
 
 ### Certificate interfaces
 
@@ -175,11 +178,11 @@ this repo unless a theorem constructs the certificate in the consuming context.
 
 ## Suggested next bridge
 
-The next low-risk bridge is to use
-`LatticeReflection.reflectionPositive_sub_add_smul` at a concrete finite-model
-call site that needs one-sided null-representative replacement, then identify
-whether the existing `ReflectionNullContext` should be generalized to carry a
-proper positive-observable subspace.
+The next low-risk bridge is to identify whether the existing
+`ReflectionNullContext` should be generalized to carry a proper
+positive-observable subspace, now that
+`isingBond_reflectionPositive_sub_add_smul` supplies the concrete finite-bond
+span input for one-sided null-representative replacement.
 
 Expected source: `Expectation.ReflectionPositive`,
 `LatticeReflection.reflectionPositive_add_smul`, and

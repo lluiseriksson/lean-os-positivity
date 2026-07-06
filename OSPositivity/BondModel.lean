@@ -369,6 +369,28 @@ theorem isingBond_reflectionPositive {beta : Real} (hbeta : 0 ≤ beta) :
   bond_reflectionPositive _ _ (ferromagneticKernel_symm beta)
     (ferromagneticKernel_psd hbeta)
 
+/--
+Concrete finite-model span nonnegativity for a null-representative difference
+in the ferromagnetic bond model.  This is a direct consumption helper for the
+one-sided null bookkeeping shape `((F₁ - F₂) + b • G)`.
+-/
+theorem isingBond_reflectionPositive_sub_add_smul {beta : Real} (hbeta : 0 ≤ beta)
+    {F₁ F₂ G : LatticeObservable Bool S}
+    (hF₁ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide F₁)
+    (hF₂ : LatticeReflection.DependsOnlyOn bondReflection.positiveSide F₂)
+    (hG : LatticeReflection.DependsOnlyOn bondReflection.positiveSide G)
+    (b : Complex) :
+    ComplexNonnegative
+      (Expectation.reflectionForm
+        (bondWeight (ferromagneticKernel beta)
+          (ferromagneticKernel_nonneg beta)).toExpectation
+        (bondReflection.mapConfig : Configuration Bool S -> Configuration Bool S)
+        ((F₁ - F₂) + b • G)) :=
+  isingBond_reflectionPositive hbeta ((F₁ - F₂) + b • G)
+    (LatticeReflection.DependsOnlyOn.add
+      (LatticeReflection.DependsOnlyOn.sub hF₁ hF₂)
+      (LatticeReflection.DependsOnlyOn.smul b hG))
+
 end BondModel
 
 end OSPositivity

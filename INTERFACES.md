@@ -83,6 +83,7 @@ order below is a breaking change for the mother repository.
 - `ferromagneticKernel_symm`
 - `ferromagneticKernel_psd`
 - `isingBond_reflectionPositive`
+- `isingBond_reflectionPositive_sub_add_smul`
 
 ## Transfer-Matrix Layer
 
@@ -149,6 +150,9 @@ order below is a breaking change for the mother repository.
 - `LatticeReflection.reflectionPositive_sub_add_smul` gives the same
   nonnegativity input for `(F₁ - F₂) + b • G`, the exact shape consumed by
   one-sided null-representative lemmas.
+- `isingBond_reflectionPositive_sub_add_smul` is the concrete ferromagnetic
+  bond-model instance of that null-difference span shape for `{true}`-local
+  observables.
 - The missing `lean-transfer-matrix` package is not imported in `lakefile.lean`
   because no reachable repository was found during setup.  Its future import
   should produce `TransferMatrixReflectionCertificate` values.
