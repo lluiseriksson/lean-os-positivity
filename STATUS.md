@@ -1,14 +1,17 @@
 # Satellite status
 
-Last updated: 2026-07-07 05:24 CEST.
+Last updated: 2026-07-07 07:32 CEST.
 
 ## Default branch
 
 - Default branch: `main`
-- Checked HEAD: `746ecb3791f23e20b752d9fb21a2c9f3143678c3`
-- Latest remote checks on that HEAD: `CI` success and `heartbeat` success
+- Checked HEAD: `b9b072b26ce50eff87c038ea290ce7d3ed33f5db`
+- Latest remote checks on that HEAD: `CI` success
+  ([run 28843621396](https://github.com/lluiseriksson/lean-os-positivity/actions/runs/28843621396))
+  and `heartbeat` success
+  ([run 28843621398](https://github.com/lluiseriksson/lean-os-positivity/actions/runs/28843621398))
 - Open PRs at this check: none
-- Most recent satellite PR: #55, merged into `main`
+- Most recent satellite PR: #57, merged into `main`
 - Open coordination issue: `agent-task` #10
 
 ## Mother-facing surface
@@ -28,8 +31,10 @@ The current compile-time consumer oracle is
 4. `IsingBondTrueSideOracle`
 5. `ReflectionNullContextOracle`
 
-The first downstream copy target should be the
-`PairingFormAlgebraOracle` section, especially these public names:
+The first downstream copy target remains the
+`PairingFormAlgebraOracle` section of `OSPositivity/MotherOracle.lean`,
+cross-checking the hypothesis/order details against
+`MOTHER_CONSUMPTION_CHECKLIST.md`.  The exact public names are:
 
 - `WeightFunction.reflectionForm_eq_pairingForm`
 - `WeightFunction.pairingForm_add_left`
@@ -49,4 +54,5 @@ construction, `hRpoly`, raw activity, a mass gap theorem, or a Clay result.
 
 In `THE-ERIKSSON-PROGRAMME`, choose the Lean API smoke-test file, then mirror
 `PairingFormAlgebraOracle` from `OSPositivity/MotherOracle.lean` using only
-`import Interfaces`.
+`import Interfaces`; use `MOTHER_CONSUMPTION_CHECKLIST.md` as the copy checklist
+and stop before quotient or `GNSReconstruction` construction.
