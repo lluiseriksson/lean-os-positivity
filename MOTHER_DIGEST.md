@@ -20,6 +20,7 @@ theorem hypotheses.
 |---|---|---|
 | `Interfaces.lean` | Root public contract import. | Import this from the mother repo. |
 | `OSPositivity/MotherOracle.lean` | Compile-time consumer oracle. | Checks the `Interfaces` import path for pairing-form algebra, Cauchy-Schwarz/null-absorption helpers, locality/span helpers, and one-sided/two-sided null-representative test shapes. |
+| `MOTHER_CONSUMPTION_CHECKLIST.md` | Copy checklist for the mother repo. | Names oracle sections, theorem/API names, hypotheses, and the intended smoke-test order. |
 | `INTERFACES.md` | Breaking-change ledger for public names. | Check before relying on argument order or names. |
 | `HYPOTHESIS_FRONTIER.md` | Honesty ledger for explicit certificates and missing bridges. | Cite this when explaining what is still assumed. |
 
@@ -261,7 +262,8 @@ The oracle stops at pairing-form well-definedness.  It does not construct
 
 ## Suggested next bridge
 
-The next low-risk bridge inside this repository is a compact status/checklist
-entry naming which `OSPositivity/MotherOracle.lean` sections should be copied
-into THE-ERIKSSON-PROGRAMME after that repo chooses its Lean API smoke-test
-file.  Do not edit the mother repository from this satellite.
+The next low-risk bridge is downstream only: choose the Lean API smoke-test file
+inside THE-ERIKSSON-PROGRAMME, then copy one section at a time from
+`OSPositivity/MotherOracle.lean` using `MOTHER_CONSUMPTION_CHECKLIST.md` as the
+order and hypothesis checklist.  Do not edit the mother repository from this
+satellite.
