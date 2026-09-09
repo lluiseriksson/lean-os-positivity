@@ -1,5 +1,8 @@
 # lean-os-positivity
 
+<!-- RESEARCH-UPDATE-2026-09-09 -->
+> **Research update · 9 September 2026:** [verified source cards, limits and next experiments](research/updates/2026-09-09.md) · [machine-readable dossier](research/updates/2026-09-09.json).
+
 Lean 4 / Mathlib satellite repository for the THE-ERIKSSON-PROGRAMME.
 
 This repository formalizes the **definition layer** for lattice reflection

@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-09-09",
+  "window": {
+    "start": "2026-09-03",
+    "end": "2026-09-09",
+    "calendar_week_start": "2026-09-07"
+  },
+  "coverage": "targeted, non-exhaustive",
+  "repository_card": {
+    "repository": "lluiseriksson/lean-os-positivity",
+    "source_ids": [
+      "2609.04423",
+      "2609.01605",
+      "2608.27267"
+    ],
+    "local_anchors": [
+      "README.md",
+      "HYPOTHESIS_FRONTIER.md",
+      "INTERFACES.md"
+    ],
+    "frontier": "Reflection positivity, GNS reconstruction and Wilson certificates expose separate proof obligations; real poles alone are not certificates.",
+    "bridge_hypothesis": "Treat real-pole effective models as adversarial tests of the OS dictionary. Preserve the positive-time observable algebra and reflection form. Gauge-fixed fields, quantum channels and Euclidean Wilson observables have different positivity structures.",
+    "next_finite_task": "Build a small reflection Gram matrix for a toy transfer model and compare its PSD condition with propagator-pole reality. Separately check whether tree gauge fixing commutes with the chosen physical reflection.",
+    "falsifier": "A negative reflection quadratic form refutes the toy RP claim; failure of reflection compatibility blocks importing gauge-fixed positivity into WilsonRPCertificate.",
+    "related_repositories": [
+      "lean-transfer-matrix",
+      "lean-2d-yang-mills",
+      "THE-ERIKSSON-PROGRAMME"
+    ],
+    "proposal_status": "speculative; not executed or formally verified",
+    "eliminated_hypotheses": [],
+    "inspected_commit": "2ea7692fb7a60cac1b8f1deac5b1446c12557218"
+  },
+  "sources": [
+    {
+      "id": "arxiv:2609.04423",
+      "arxiv_id": "2609.04423",
+      "title": "On Quasiparticles within the Refined Gribov-Zwanziger Model",
+      "authors": [
+        "Garcia, Felipe F.",
+        "Capri, Marcio A. L.",
+        "Mintz, Bruno W."
+      ],
+      "first_submitted": "2026-09-03",
+      "latest_revision": "2026-09-03",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2609.04423v1",
+      "doi": "10.48550/arXiv.2609.04423",
+      "verified_on": "2026-09-09",
+      "recency": "new-in-trailing-week",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "The refined Gribov-Zwanziger effective model is reexamined through PT symmetry, with a proposed interpretation of quadratic excitations in the real-mass-pole case.",
+      "limits": "An effective gauge-fixed propagator and real poles do not establish reflection positivity for gauge-invariant Wilson observables, OS reconstruction, or a physical mass gap.",
+      "tags": [
+        "yang-mills",
+        "reflection-positivity",
+        "effective-models"
+      ],
+      "abstract_page_sha256": "ffa44376c2a8286387edbdfcfbda4338224a2bf0cf45e1e3715bf01cc1af8b10",
+      "reviewed_full_text_sha256": null,
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    },
+    {
+      "id": "arxiv:2609.01605",
+      "arxiv_id": "2609.01605",
+      "title": "Depth-1 expanders on the unitary group and applications",
+      "authors": [
+        "Anshu, Anurag",
+        "Balasubramanian, Shankar",
+        "Haferkamp, Jonas",
+        "Harrow, Aram W.",
+        "Tan, Xinyu"
+      ],
+      "first_submitted": "2026-09-01",
+      "latest_revision": "2026-09-01",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2609.01605v1",
+      "doi": "10.48550/arXiv.2609.01605",
+      "verified_on": "2026-09-09",
+      "recency": "background",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "Anshu and collaborators construct constant-degree, constant-gap quantum expanders with depth-one local circuit realizations and apply them to one-dimensional Hamiltonians with an entanglement-gap relation.",
+      "limits": "An expander gap, a transfer gap and a many-body Hamiltonian gap are different operators. Track dimension, locality and the definition of gap before translating. First posted 1 September.",
+      "tags": [
+        "spectral-gap",
+        "quantum-information",
+        "locality"
+      ],
+      "abstract_page_sha256": "a4375a297a32c261481633f61ce35da65429fedec138e6d5cf00e6312051d8db",
+      "reviewed_full_text_sha256": null,
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    },
+    {
+      "id": "arxiv:2608.27267",
+      "arxiv_id": "2608.27267",
+      "title": "Efficient Quantum Simulations of Yang-Mills theory with Maximal-tree Gauge",
+      "authors": [
+        "Li, Tianyin",
+        "Li, Ying-Ying",
+        "Wang, Xiaoyang",
+        "Xing, Hongxi"
+      ],
+      "first_submitted": "2026-08-27",
+      "latest_revision": "2026-08-27",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2608.27267v1",
+      "doi": "10.48550/arXiv.2608.27267",
+      "verified_on": "2026-09-09",
+      "recency": "background",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "v1: abstract and maximal-tree gauge construction",
+      "source_claim": "Li and collaborators use maximal-tree gauge and field-amplitude digitization to obtain polynomial resource bounds for Hamiltonian Yang-Mills simulation through QSVT.",
+      "limits": "Hamiltonian simulation complexity is distinct from an exact Haar edge-coordinate equivalence, Euclidean reflection positivity, and a continuum mass gap. First posted 27 August; a September news mention is not a new submission.",
+      "tags": [
+        "gauge-fixing",
+        "spanning-trees",
+        "yang-mills",
+        "quantum-simulation"
+      ],
+      "abstract_page_sha256": "8fa19bcafeebf9e933c70192ace6a9b2ff01e8e6d04fd2e98295d10ef400f233",
+      "reviewed_full_text_sha256": "05f7e0cd23badc54c61dc3bafa5237f4126a6c2bcdda0d97b621cd3bb719dd1c",
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    }
+  ]
+}
